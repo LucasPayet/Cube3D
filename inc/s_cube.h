@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_cube.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/15 19:06:31 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/17 15:59:58 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,15 @@ typedef struct	s_cube
 	t_map	map;
 	t_img	img[2];
 } t_cube;
+
+typedef	struct s_conf{
+	char	*tex_no;
+	char	*tex_so;
+	char	*tex_we;
+	char	*tex_ea;
+	int		floor[3];
+	int		ceil[3];
+	int		tex_parsed; //bitmask : 1=NO 2=SO 4=WE 8=EA 16=F 32=C
+}t_conf;
 
 #endif
