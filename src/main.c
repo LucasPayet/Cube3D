@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:41:13 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/15 19:14:05 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/17 22:11:46 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,9 @@ int	main(int ac, char *av[])
 		ft_putstr_fd("Wrong input", 2);
 		return (1);
 	}
-	cube.mlx.mlx = mlx_init();
-	cube.mlx.win = mlx_new_window(cube.mlx.mlx, WIN_WIDTH, WIN_HEIGHT, av[1]);
 
-
-	mlx_destroy_window(cube.mlx.mlx, cube.mlx.win);
-	mlx_destroy_display(cube.mlx.mlx);
-	free(cube.mlx.mlx);
-
+	cube_init(&cube, av[1]);
+	mlx_hook(cube.mlx.win, 17, 0, close_cube, &cube);
+	mlx_loop(cube.mlx.mlx);
 	return (0);
 }

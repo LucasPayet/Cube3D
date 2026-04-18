@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.h                                             :+:      :+:    :+:   */
+/*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/17 22:24:43 by lupayet          ###   ########.fr       */
+/*   Created: 2026/04/17 22:37:47 by lupayet           #+#    #+#             */
+/*   Updated: 2026/04/17 22:38:14 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_H
-# define CUBE_H
+#include "cube.h"
 
-#include "s_cube.h"
-#include "libft.h"
-#include "mlx.h"
+int	update_pixel(t_img *img, int x, int y, int color)
+{
+	int	offset;
 
-#include <stdlib.h>
-
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
-
-void	cube_init(t_cube *c, char *title);
-int		close_cube(t_cube *c);
-
-int		hex_rgb_to_int(char *hex);
-
-void	fill_minimap(t_img *mn);
-
-#endif
+	offset = (img->line_length * y) + (x * (img->bits_per_pixel / 8));
+	*(unsigned int *)(img->addr + offset) = color;
+	return (1);
+}

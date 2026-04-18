@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.h                                             :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/17 22:24:43 by lupayet          ###   ########.fr       */
+/*   Created: 2026/04/17 18:40:04 by lupayet           #+#    #+#             */
+/*   Updated: 2026/04/17 18:51:35 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_H
-# define CUBE_H
+#include "cube.h"
 
-#include "s_cube.h"
-#include "libft.h"
-#include "mlx.h"
-
-#include <stdlib.h>
-
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
-
-void	cube_init(t_cube *c, char *title);
-int		close_cube(t_cube *c);
-
-int		hex_rgb_to_int(char *hex);
-
-void	fill_minimap(t_img *mn);
-
-#endif
+int	close_cube(t_cube *c)
+{
+	//clean_fdf(fdf);
+	if (c->mlx.mlx)
+	{
+		if (c->mlx.win)
+		{
+			mlx_destroy_window(c->mlx.mlx, c->mlx.win);
+			mlx_destroy_display(c->mlx.mlx);
+			free(c->mlx.mlx);
+		}
+	}
+	exit(0);
+	return (0);
+}

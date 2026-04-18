@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.h                                             :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/17 22:24:43 by lupayet          ###   ########.fr       */
+/*   Created: 2026/04/17 21:52:57 by lupayet           #+#    #+#             */
+/*   Updated: 2026/04/17 22:46:53 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_H
-# define CUBE_H
+#include "cube.h"
 
-#include "s_cube.h"
-#include "libft.h"
-#include "mlx.h"
+void	fill_minimap(t_img *mn)
+{
+	int	x;
+	int	y;
+	int	color;
 
-#include <stdlib.h>
+	color = 0x00FF0000; // red
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
-
-void	cube_init(t_cube *c, char *title);
-int		close_cube(t_cube *c);
-
-int		hex_rgb_to_int(char *hex);
-
-void	fill_minimap(t_img *mn);
-
-#endif
+	y = 0;
+	while (y < 40)
+	{
+		x = 0;
+		while (x < 40)
+		{
+			int index = y * mn->line_length + x * (mn->bits_per_pixel / 8);
+			*(unsigned int *)(mn->addr + index) = color;
+			x++;
+		}
+		y++;
+	}
+}

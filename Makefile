@@ -6,7 +6,7 @@
 #    By: lupayet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/04/15 19:13:15 by lupayet          ###   ########.fr        #
+#    Updated: 2026/04/17 22:13:47 by lupayet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC_D = ./src/
 INC = ./inc/
 OBJ_D = ./obj/
 
-SRC	= main.c
+SRC	= main.c init.c close.c color.c minimap.c
 HEADER = cube.h s_cube.h
 
 OBJ	= $(addprefix $(OBJ_D), $(SRC:.c=.o))
