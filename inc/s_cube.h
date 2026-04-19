@@ -6,14 +6,12 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 18:14:10 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/19 23:06:21 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_CUBE_H
 # define S_CUBE_H
-
-# define TILE 40
 
 typedef struct	s_mlx
 {
@@ -64,6 +62,7 @@ typedef struct	s_cube
 {
 	t_mlx	mlx;
 	t_map	map;
+	t_cam	cam;
 	t_keys	keys;
 	t_img	map_img;
 	t_img	view_img;

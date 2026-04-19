@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:17 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 18:33:00 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/19 23:34:45 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,25 @@ char **create_map(void)
     return (map);
 }
 
+static void	init_cam(t_cam *cam)
+{
+	cam->pos_x = 2;
+	cam->pos_y = 1;
+	cam->dir_x = 1.5;
+	cam->dir_y = 1;
+}
+
 void	cube_init(t_cube *c, char *title)
 {
 	c->mlx.mlx = mlx_init();
 	c->mlx.win = mlx_new_window(c->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, title);
-	c->map_img.img = mlx_new_image(c->mlx.mlx, 40, 40);
+	c->map_img.img = mlx_new_image(c->mlx.mlx, MMAP_W, MMAP_H);
 	c->map_img.addr = mlx_get_data_addr(c->map_img.img, &c->map_img.bits_per_pixel,
 			&c->map_img.line_length, &c->map_img.endian);
-	fill_minimap(&c->map_img);
+	c->map.map = create_map();
+	init_cam(&c->cam);
+	c->map.width = 6;
+	c->map.height = 6;
+	fill_minimap(c);
 	mlx_put_image_to_window(c->mlx.mlx, c->mlx.win, c->map_img.img, 40, 40);
 }
