@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/17 23:03:14 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/19 18:14:10 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,21 @@ typedef struct	s_cam
 	double	dir_y;
 }	t_cam;
 
+typedef struct s_keys
+{
+	int w;
+	int a;
+	int s;
+	int d;
+	int left;
+	int right;
+}	t_keys;
+
 typedef struct	s_cube
 {
 	t_mlx	mlx;
 	t_map	map;
+	t_keys	keys;
 	t_img	map_img;
 	t_img	view_img;
 } t_cube;

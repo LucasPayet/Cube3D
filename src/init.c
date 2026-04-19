@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:17 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 00:16:23 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/19 18:33:00 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char **create_map(void)
     char **map;
 
     map = malloc(sizeof(char *) * 6);
-	map[0] = strdup("111111");
-	map[1] = strdup("100001");
-	map[2] = strdup("101101");
-	map[3] = strdup("100001");
-	map[4] = strdup("111111");
+	map[0] = ft_strdup("111111");
+	map[1] = ft_strdup("100001");
+	map[2] = ft_strdup("101101");
+	map[3] = ft_strdup("100001");
+	map[4] = ft_strdup("111111");
 	map[5] = NULL;
 
     return (map);
