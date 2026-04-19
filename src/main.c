@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:41:13 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/15 19:14:05 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/19 20:49:43 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-#include "libft.h"
+// #include "libft.h"
 
 int	main(int ac, char *av[])
 {

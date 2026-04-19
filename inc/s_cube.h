@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/17 15:59:58 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/04/19 20:37:46 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,12 @@ typedef struct s_map
 {
         int             width;
         int             height;
-        int             fd;
+        // int             fd;
+		
+		int				map_start;
+		
+		char	*spawn_dir;
+		char	*fn;
         char    *line;
         char    **split;
 		char	**map;
@@ -46,6 +51,16 @@ typedef struct	s_cam
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
+	
+	double	perpWallDist;
+	double	frameTime;
+	long	time;
+	long	oldTime;
+
+	int		side;
+	
+	int		playerX;
+	int		playerY;
 }	t_cam;
 
 typedef struct	s_cube
@@ -53,6 +68,8 @@ typedef struct	s_cube
 	t_mlx	mlx;
 	t_map	map;
 	t_img	img[2];
+	t_conf	conf;
+	t_cam	cam;
 } t_cube;
 
 typedef	struct s_conf{

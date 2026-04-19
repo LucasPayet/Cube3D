@@ -3,81 +3,88 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lupayet <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/04/15 19:13:15 by lupayet          ###   ########.fr        #
+#    Updated: 2026/04/19 21:01:45 by cbrice           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
-
-NAME = cube3D
-
-CC	= cc
-CFLAGS	= -Wall -Wextra -Werror
+NAME = cub3D
+BIN_DIR = bin
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g
 
 RM = rm -f
 
-LIBFT_P = ./libft/
-MLX_P = ./mlx/
+LIBFT_DIR = ./libft
+MLX_DIR = ./mlx
 
-LIBFT = $(LIBFT_P)libft.a
-MLX = $(MLX_P)libmlx_Linux.a
+LIBFT = $(LIBFT_DIR)/libft.a
+MLX_LIB = $(MLX_DIR)/libmlx.a
 
-SRC_D = ./src/
-INC = ./inc/
-OBJ_D = ./obj/
+INC = -I/opt/X11/include -I$(MLX_DIR) -I./inc -I$(LIBFT_DIR)
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
 
-SRC	= main.c
-HEADER = cube.h s_cube.h
+SRC = ./src/main.c ./src/init_game.c ./src/moving.c \
+      ./src/init_map.c ./src/parsing_map.c \
+      ./src/parsing_identifiers.c ./src/exit.c
+MAP ?= maps/valide/test.cub
 
-OBJ	= $(addprefix $(OBJ_D), $(SRC:.c=.o))
-DEPS = $(addprefix $(INC), $(HEADER))
+all: $(BIN_DIR)/$(NAME) cub
 
-$(OBJ_D)%.o: $(SRC_D)%.c
-	$(CC) -Wall -Wextra -Werror -I$(INC) -I$(LIBFT_P) -I$(MLX_P) -I./usr/include -Imlx_linux -O3 -c $< -o $@
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
 
-all: $(NAME)
+cub:
+	@printf '#!/bin/bash\nMAP=$$(find maps/ -name "$$1" 2>/dev/null | head -1)\nif [ -z "$$MAP" ]; then\n    echo "Error: '\''$$1'\'' not found in maps/"\n    exit 1\nfi\n./$(BIN_DIR)/$(NAME) "$$MAP"\n' > cub
+	@chmod +x cub
+	@echo "> Script ./cub created"
 
-$(OBJ_D):
-	@mkdir -p $(OBJ_D)
-
-$(MLX):
+$(MLX_LIB):
 	@echo "\nCOMPILING MLX..."
-	@make -C $(MLX_P)
+	@if [ ! -d $(MLX_DIR) ]; then echo "ERROR: $(MLX_DIR) not found!"; exit 1; fi
+	@if [ -f $(MLX_DIR)/configure ] && [ ! -f $(MLX_DIR)/Makefile ]; then \
+		cd $(MLX_DIR) && ./configure 1>/dev/null; \
+	fi
+	@if [ ! -f $(MLX_DIR)/Makefile ]; then \
+		echo "ERROR: No Makefile in $(MLX_DIR)"; exit 1; \
+	fi
+	@make -C $(MLX_DIR) 1>/dev/null
 	@echo "> MLX CREATED"
 
 $(LIBFT):
 	@echo "\nCOMPILING LIBFT..."
-	@make -C $(LIBFT_P) 1>/dev/null
+	@make re -C $(LIBFT_DIR) 1>/dev/null
 	@echo "> LIBFT CREATED"
 
-$(NAME): $(MLX) $(LIBFT) $(OBJ_D) $(DEPS) $(OBJ)
-	@echo "\nCOMPILING cube3D..."
-	@$(CC) $(CFLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L./mlx/ -lmlx -lXext -lX11 -lm $(LIBFT_P)libft.a -o $(NAME)
-	@echo "> cube3D READY"
+$(BIN_DIR)/$(NAME): $(BIN_DIR) $(MLX_LIB) $(LIBFT)
+	@echo "\nCOMPILING $(NAME)..."
+	@$(CC) $(SRC) $(CFLAGS) $(INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(BIN_DIR)/$(NAME)
+	@echo "> $(NAME) READY"
+
+run: all
+	./$(BIN_DIR)/$(NAME) $(MAP)
+
+val: all
+	valgrind --leak-check=full --show-leak-kinds=all ./$(BIN_DIR)/$(NAME) $(MAP)
 
 clean:
-	@make clean -C $(MLX_P) 1>/dev/null 2>/dev/null
-	@make clean -C $(LIBFT_P) 1>/dev/null
-	@rm -f $(OBJ)
+	@if [ -f $(MLX_DIR)/Makefile ]; then make clean -C $(MLX_DIR) 1>/dev/null 2>/dev/null; fi
+	@if [ -f $(LIBFT_DIR)/Makefile ]; then make clean -C $(LIBFT_DIR) 1>/dev/null; fi
+	@echo "> OBJECTS CLEANED"
 
 fclean: clean
-	@make fclean -C $(LIBFT_P) 1>/dev/null
-	@rm -f $(NAME)
+	@$(RM) -r $(BIN_DIR)
+	@$(RM) $(LIBFT)
+	@$(RM) cub
+	@$(RM) vgcore.*
+	@echo "> ALL CLEANED"
 
-
-bonus: $(BONUS)
-
-re:fclean all
-
-rebonus: fclean bonus
+re: fclean all
 
 dev: re
 	@make clean 1>/dev/null
 
-devbonus: rebonus
-	@make clean 1>/dev/null
-
-.PHONY: all clean fclean re dev
+.PHONY: all clean fclean re run val dev cub
