@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:17 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 23:34:45 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/20 19:05:41 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,22 @@ char **create_map(void)
 
 static void	init_cam(t_cam *cam)
 {
-	cam->pos_x = 2;
-	cam->pos_y = 1;
-	cam->dir_x = 1.5;
-	cam->dir_y = 1;
+	cam->pos_x = 0;
+	cam->pos_y = 0;
+	cam->dir_x = 1;
+	cam->dir_y = 0;
+	cam->plane_x = 0;
+	cam->plane_y = 0.66;
+}
+
+static void	init_keys(t_keys *k)
+{
+	k->w = 0;
+	k->s = 0;
+	k->a = 0;
+	k->d = 0;
+	k->left = 0;
+	k->right = 0;
 }
 
 void	cube_init(t_cube *c, char *title)
@@ -42,10 +54,14 @@ void	cube_init(t_cube *c, char *title)
 	c->map_img.img = mlx_new_image(c->mlx.mlx, MMAP_W, MMAP_H);
 	c->map_img.addr = mlx_get_data_addr(c->map_img.img, &c->map_img.bits_per_pixel,
 			&c->map_img.line_length, &c->map_img.endian);
+	c->map_img.x_len = MMAP_W;
+	c->map_img.y_len = MMAP_H;
 	c->map.map = create_map();
+	init_keys(&c->keys);
 	init_cam(&c->cam);
-	c->map.width = 6;
-	c->map.height = 6;
-	fill_minimap(c);
-	mlx_put_image_to_window(c->mlx.mlx, c->mlx.win, c->map_img.img, 40, 40);
+	c->map.width = 5;
+	c->map.height = 5;
+//	fill_minimap(c);
+//	mlx_put_image_to_window(c->mlx.mlx, c->mlx.win, c->map_img.img, 40, 40);
+
 }

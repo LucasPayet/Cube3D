@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 23:06:21 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/20 04:52:59 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct	s_cam
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }	t_cam;
 
 typedef struct s_keys

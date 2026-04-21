@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 21:52:57 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 23:29:38 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/20 19:11:49 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	draw_square(t_img *img, int start_x, int start_y, int size, int color)
 {
+	/*
 	int	x;
 	int	y;
 
@@ -24,6 +25,32 @@ void	draw_square(t_img *img, int start_x, int start_y, int size, int color)
 		while (x < size)
 		{
 			update_pixel(img, start_x + x, start_y + y, color);
+			x++;
+		}
+		y++;
+	}*/
+	int	x;
+	int	y;
+	int	end_x = start_x + size;
+	int	end_y = start_y + size;
+
+	// clip against image borders
+	if (start_x < 0)
+		start_x = 0;
+	if (start_y < 0)
+		start_y = 0;
+	if (end_x > img->x_len)
+		end_x = img->x_len;
+	if (end_y > img->y_len)
+		end_y = img->y_len;
+
+	y = start_y;
+	while (y < end_y)
+	{
+		x = start_x;
+		while (x < end_x)
+		{
+			update_pixel(img, x, y, color);
 			x++;
 		}
 		y++;
@@ -90,11 +117,10 @@ void	fill_minimap(t_cube *cube)
 			int my = start_y + y;
 
 			int color;
-
 			if (mx < 0 || my < 0 ||
-				mx >= cube->map.width || my >= cube->map.height)
-				color = 0x000000;
-			else if (cube->map.map[my][mx] == '1')
+				mx > cube->map.width || my > cube->map.height)
+				color = 0x0000FFFF;
+			else if (cube->map.map[my] && cube->map.map[my][mx] == '1')
 				color = 0x00FFFFFF;
 			else
 				color = 0x00333333;
@@ -103,7 +129,6 @@ void	fill_minimap(t_cube *cube)
 			int draw_y = y * TILE - offset_y;
 
 			draw_square(&cube->map_img, draw_x, draw_y, TILE, color);
-	printf("lol\n");
 		}
 	}
     // draw player at center

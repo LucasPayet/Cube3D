@@ -6,16 +6,16 @@
 #    By: lupayet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/04/19 23:17:14 by lupayet          ###   ########.fr        #
+#    Updated: 2026/04/20 13:44:06 by lupayet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.SILENT:
+#.SILENT:
 
 NAME = cube3D
 
 CC	= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 
 RM = rm -f
 
@@ -29,14 +29,14 @@ SRC_D = ./src/
 INC = ./inc/
 OBJ_D = ./obj/
 
-SRC	= main.c init.c close.c color.c minimap.c input.c pixel.c
+SRC	= main.c init.c close.c color.c minimap.c input.c pixel.c render.c
 HEADER = cube.h s_cube.h
 
 OBJ	= $(addprefix $(OBJ_D), $(SRC:.c=.o))
 DEPS = $(addprefix $(INC), $(HEADER))
 
 $(OBJ_D)%.o: $(SRC_D)%.c
-	$(CC) -Wall -Wextra -Werror -I$(INC) -I$(LIBFT_P) -I$(MLX_P) -I./usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC) -I$(LIBFT_P) -I$(MLX_P) -I./usr/include -Imlx_linux -O3 -c $< -o $@
 
 all: $(NAME)
 
@@ -55,7 +55,7 @@ $(LIBFT):
 
 $(NAME): $(MLX) $(LIBFT) $(OBJ_D) $(DEPS) $(OBJ)
 	@echo "\nCOMPILING cube3D..."
-	@$(CC) $(CFLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L./mlx/ -lmlx -lXext -lX11 -lm $(LIBFT_P)libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L./mlx/ -lmlx -lXext -lX11 -lm $(LIBFT_P)libft.a -o $(NAME)
 	@echo "> cube3D READY"
 
 clean:
