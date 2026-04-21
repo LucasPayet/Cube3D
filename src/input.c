@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 15:33:03 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/20 19:00:44 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/21 13:57:20 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	key_press(int keycode, t_cube *c)
 {
-	printf("PRESS %d %d\n", (int)c->cam.pos_x , (int)c->cam.pos_y);
+	printf("PRESS %lf %lf\n", c->cam.pos_x , c->cam.pos_y);
 	if (keycode == ESC)
 		close_cube(c);
 	if (keycode == 119)

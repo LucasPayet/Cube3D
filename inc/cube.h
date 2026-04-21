@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/20 06:08:37 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/21 14:40:46 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIN_HEIGHT 720
 # define MMAP_W 200
 # define MMAP_H 200
-# define MMAP 6
+# define MMAP 5
 # define TILE 40
 
 # define ESC 65307
