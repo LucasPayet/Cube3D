@@ -13,11 +13,16 @@
 #ifndef S_CUBE_H
 # define S_CUBE_H
 
-typedef struct	s_mlx
-{
-	void    *mlx;
-	void    *win;
-}	t_mlx;
+// #include "cube.h"
+
+typedef struct s_mlx{
+	void	*win;
+	void	*mlx;
+
+	int		x;
+	int		y;
+	char	str[3];
+}t_mlx;
 
 typedef struct s_img
 {
@@ -28,7 +33,15 @@ typedef struct s_img
         int             endian;
         int             x_len;
         int             y_len;
-}       t_img;
+
+		int		on_exit;
+
+		void	*exit;
+		void	*collect;
+		void	*wall;
+		void	*empty;
+		void	*player;
+} t_img;
 
 typedef struct s_map
 {
@@ -38,12 +51,12 @@ typedef struct s_map
 		
 		int				map_start;
 		
-		char	*spawn_dir;
+		char	spawn_dir;
 		char	*fn;
         char    *line;
         char    **split;
 		char	**map;
-}       t_map;
+} t_map;
 
 typedef struct	s_cam
 {
@@ -58,19 +71,16 @@ typedef struct	s_cam
 	long	oldTime;
 
 	int		side;
+
+	double	deltaDistX;
+	double	deltaDistY;
+
+	double sideDistX;
+	double sideDistY;
 	
 	int		playerX;
 	int		playerY;
-}	t_cam;
-
-typedef struct	s_cube
-{
-	t_mlx	mlx;
-	t_map	map;
-	t_img	img[2];
-	t_conf	conf;
-	t_cam	cam;
-} t_cube;
+} t_cam;
 
 typedef	struct s_conf{
 	char	*tex_no;
@@ -81,5 +91,15 @@ typedef	struct s_conf{
 	int		ceil[3];
 	int		tex_parsed; //bitmask : 1=NO 2=SO 4=WE 8=EA 16=F 32=C
 }t_conf;
+
+typedef struct	s_cube
+{
+	t_mlx	mlx;
+	t_map	map;
+	t_img	*img;
+	t_conf	conf;
+	t_cam	cam;
+} t_cube;
+
 
 #endif

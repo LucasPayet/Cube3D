@@ -22,8 +22,8 @@
 # include <stdarg.h>
 # include <limits.h>
 # include <fcntl.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
+// # include <X11/X.h>
+// # include <X11/keysym.h>
 
 typedef struct s_list
 {

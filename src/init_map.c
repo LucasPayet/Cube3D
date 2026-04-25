@@ -5,6 +5,12 @@ static int	is_map_line(char *line)
 	int	i;
 
 	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (line[i] == '\n' || line[i] == '\0')
+		return (0);
+	if (line[i] != '1' && line[i] != '0')
+		return (0);
 	while (line[i] && line[i] != '\n')
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != ' '
@@ -13,7 +19,7 @@ static int	is_map_line(char *line)
 			return (0);
 		i++;
 	}
-	return (i > 0);
+	return (1);
 }
 
 void	ft_map_height(t_cube *data)
@@ -53,6 +59,7 @@ void	ft_map_height(t_cube *data)
 	if (data->map.height == 0)
 		error_exit("no map found", data);
 }
+
 
 char	*trim_newline(char *line)
 {
