@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/26 22:48:33 by celia             #+#    #+#             */
+/*   Updated: 2026/04/26 22:48:34 by celia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 void	free_game(t_cube *data)
@@ -22,7 +34,7 @@ void	free_game(t_cube *data)
 	if (data->img)
 		free(data->img);
 }
-//il faut remplacer tout les printf avec cette fonction, pas fait encore!!!!!!
+
 void	error_exit(char *msg, t_cube *data)
 {
 	ft_printf("Error\n%s\n", msg);

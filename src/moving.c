@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moving.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/26 22:48:55 by celia             #+#    #+#             */
+/*   Updated: 2026/04/26 22:48:56 by celia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 
@@ -5,32 +17,19 @@ void	move_player(t_cube *data, int new_x, int new_y)
 {
 	char next_tile = data->map.map[new_y][new_x];
 
-	if (next_tile == '1') // mur
+	if (next_tile == '1')
 		return ;
 
-	// if (next_tile == 'C') // collectible
-	// {
-	// 	data->count--;
-	// }
 	else if (next_tile == 'E')
-	{
-		// if (data->count == 0)
-		// {
-		// 	data->escape = 1;
-			data->img->on_exit = 1;
-	}
+		data->img->on_exit = 1;
 		else
-			return; // empêche d'aller sur la sortie si collectibles restants
-	// else
+			return;
 	data->img->on_exit = 0;
 
-	data->map.map[data->cam.playerY][data->cam.playerX] = data->img->on_exit ? 'E' : '0';// ancienne position
-	data->map.map[new_y][new_x] = 'P';          // nouvelle position
+	data->map.map[data->cam.playerY][data->cam.playerX] = data->img->on_exit ? 'E' : '0';
+	data->map.map[new_y][new_x] = 'P';
 	data->cam.playerX = new_x;
 	data->cam.playerY = new_y;
-	// data->step++;
-
-	// ft_printf("Steps: %d\n", data->step);
 }
 
 void	move_w(t_cube *data)
@@ -73,11 +72,7 @@ int	press_key(int keycode, void *game)
 	else if (keycode == D)
 		move_d(data);
 
-	mlx_clear_window(data->mlx.mlx, data->mlx.win); 
-	// ft_create_map(data);                    
-
-	// if (data->count == 0 && data->on_exit == 1)
-	// 	ft_game_result(data);
+	mlx_clear_window(data->mlx.mlx, data->mlx.win);
 
 	return (0);
 }
@@ -85,7 +80,6 @@ int	press_key(int keycode, void *game)
 void    update_time(t_cube *data)
 {
     data->cam.oldTime   = data->cam.time;
-    //data->time      = get_ticks(); // ton équivalent de getTicks()
     data->cam.frameTime = (data->cam.time - data->cam.oldTime) / 1000.0;
     ft_printf("FPS: %f\n", 1.0 / data->cam.frameTime);
 }

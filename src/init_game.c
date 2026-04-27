@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/26 22:48:40 by celia             #+#    #+#             */
+/*   Updated: 2026/04/26 22:49:40 by celia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 
@@ -18,7 +30,6 @@ void	put_player_img(t_cube *data, int *j, int *i)
 	{
 		ft_printf("Failed to load player image");
 	}
-		
 }
 
 void	put_wall_img(t_cube *data, int *j, int *i)
