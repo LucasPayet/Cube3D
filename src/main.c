@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:41:13 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 20:49:43 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/04/28 15:09:13 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_parse_map(t_cube *data)
 {
-	data->img->wall = mlx_xpm_file_to_image(data->mlx.mlx,
-		data->conf.tex_no, &data->img->x_len, &data->img->y_len);
+	data->img->wall = mlx_xpm_file_to_image(data->mlx.mlx, data->conf.tex_no,
+		&data->img->x_len, &data->img->y_len);
 	if (!data->img->wall)
 	{
 		ft_printf("Error: failed to load NO texture: %s\n", data->conf.tex_no);

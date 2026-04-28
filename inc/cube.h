@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 20:13:01 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/04/28 15:28:39 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@
 
 //moving
 int		ft_exit(void *param);
-void	move_player(t_cube *data, int new_x, int new_y);
 
 void	move_w(t_cube *data);
 void	move_s(t_cube *data);
@@ -111,5 +110,15 @@ void	ft_init_player_dir(t_cube *data);
 
 void	free_game(t_cube *data);
 void	error_exit(char *msg, t_cube *data);
+
+void	init_dirs(int dx[4], int dy[4]);
+void	check_invalid_char(t_cube *data, char c);
+void	handle_spawn(t_cube *data, int x, int y, int *spawn_count);
+void    parse_color(char *line, int j, t_cube *data, int fd);
+void	check_borders(t_cube *data);
+void	check_spaces(t_cube *data);
+char    **dup_map(t_cube *data);
+void	parse_rgb(char *str, int rgb[3], t_cube *data);
+char	*get_tex_path(char *line);
 
 #endif

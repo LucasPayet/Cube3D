@@ -6,21 +6,11 @@
 /*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:40 by celia             #+#    #+#             */
-/*   Updated: 2026/04/26 22:49:40 by celia            ###   ########.fr       */
+/*   Updated: 2026/04/28 15:07:55 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-
-int	ft_exit(void *param)
-{
-	t_cube	*data;
-
-	data = (t_cube *)param;
-	free_game(data);
-	exit(EXIT_SUCCESS);
-}
 
 void	put_player_img(t_cube *data, int *j, int *i)
 {
@@ -46,19 +36,16 @@ void	put_empty_img(t_cube *data, int *j, int *i)
 		data->img->empty, (*j) * 40, (*i) * 40);
 }
 
-void	ft_create_map(t_cube *data)
+static int	get_color(int rgb[3])
 {
-	int		x;
-	int		y;
-	int		floor_color;
-	int		ceil_color;
+	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
+}
 
-	floor_color = (data->conf.floor[0] << 16)
-		| (data->conf.floor[1] << 8)
-		| data->conf.floor[2];
-	ceil_color = (data->conf.ceil[0] << 16)
-		| (data->conf.ceil[1] << 8)
-		| data->conf.ceil[2];
+static void	draw_background(t_cube *data, int floor_color, int ceil_color)
+{
+	int	x;
+	int	y;
+
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
@@ -75,4 +62,10 @@ void	ft_create_map(t_cube *data)
 		}
 		y++;
 	}
+}
+
+void	ft_create_map(t_cube *data)
+{
+	draw_background(data, get_color(data->conf.floor),
+		get_color(data->conf.ceil));
 }

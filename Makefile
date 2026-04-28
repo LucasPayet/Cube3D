@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+         #
+#    By: celia <celia@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/04/19 21:01:45 by cbrice           ###   ########.fr        #
+#    Updated: 2026/04/28 15:31:31 by celia            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,9 +117,10 @@ endif
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC = ./src/main.c ./src/init_game.c ./src/moving.c\
-      ./src/init_map.c ./src/parsing_map.c \
-      ./src/parsing_identifiers.c ./src/exit.c
+SRC = ./src/main.c ./src/camera.c ./src/check_map_borders.c\
+	  ./src/check_map.c ./src/exit.c ./src/init_game.c ./src/init_map.c\
+      ./src/moving.c ./src/parse_rgb.c ./src/parsing_identifiers.c\
+	  ./src/parsing_map.c ./src/read_map.c
 
 all: $(BIN_DIR)/$(NAME) cub
 

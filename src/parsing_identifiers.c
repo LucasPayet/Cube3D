@@ -6,73 +6,24 @@
 /*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:59 by celia             #+#    #+#             */
-/*   Updated: 2026/04/26 22:49:00 by celia            ###   ########.fr       */
+/*   Updated: 2026/04/28 15:02:16 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static char	*get_tex_path(char *line)
+static void	check_all_parsed(t_cube *data)
 {
-	int		start;
-	int		end;
-	char	*path;
-
-	start = 0;
-	while (line[start] == ' ' || line[start] == '\t')
-		start++;
-	end = start;
-	while (line[end] && line[end] != '\n')
-		end++;
-	path = ft_substr(line, start, end - start);
-	if (!path)
-		return (NULL);
-	return (path);
-}
-
-static void	parse_rgb(char *str, int rgb[3], t_cube *data)
-{
-	char	**parts;
-	int		i;
-	int		j;
-	char	*trimmed;
-
-	while (*str == ' ' || *str == '\t')
-		str++;
-	parts = ft_split(str, ',');
-	if (!parts || !parts[0] || !parts[1] || !parts[2] || parts[3])
-		error_exit("invalid RGB format (expected R,G,B)", data);
-	i = 0;
-	while (i < 3)
+	if (data->conf.tex_parsed != 63)
 	{
-		trimmed = parts[i];
-		while (*trimmed == ' ' || *trimmed == '\t')
-			trimmed++;
-		j = 0;
-		while (trimmed[j] && trimmed[j] != '\n')
-		{
-			if (trimmed[j] < '0' || trimmed[j] > '9')
-			{
-				free(parts[i]);
-				free(parts);
-				error_exit("RGB must be numeric", data);
-			}
-			j++;
-		}
-		rgb[i] = ft_atoi(trimmed);
-		if (rgb[i] < 0 || rgb[i] > 255)
-		{
-			free(parts[i]);
-			free(parts);
-			error_exit("RGB value out of range [0-255]", data);
-		}
-		free(parts[i]);
-		i++;
+		ft_printf("Error\nMissing identifier(s) (mask: %d/63)\n",
+			data->conf.tex_parsed);
+		free_game(data);
+		exit(EXIT_FAILURE);
 	}
-	free(parts);
 }
 
-static void	parse_line(char *line, int j, t_cube *data, int fd)
+static void	parse_tex_ns(char *line, int j, t_cube *data)
 {
 	if (ft_strncmp(line + j, "NO ", 3) == 0)
 	{
@@ -88,7 +39,11 @@ static void	parse_line(char *line, int j, t_cube *data, int fd)
 		data->conf.tex_so = get_tex_path(line + j + 3);
 		data->conf.tex_parsed |= 2;
 	}
-	else if (ft_strncmp(line + j, "WE ", 3) == 0)
+}
+
+static void	parse_tex_we(char *line, int j, t_cube *data)
+{
+	if (ft_strncmp(line + j, "WE ", 3) == 0)
 	{
 		if (data->conf.tex_parsed & 4)
 			error_exit("duplicate WE", data);
@@ -102,26 +57,18 @@ static void	parse_line(char *line, int j, t_cube *data, int fd)
 		data->conf.tex_ea = get_tex_path(line + j + 3);
 		data->conf.tex_parsed |= 8;
 	}
-	else if (ft_strncmp(line + j, "F ", 2) == 0)
-	{
-		if (data->conf.tex_parsed & 16)
-			error_exit("duplicate F", data);
-		parse_rgb(line + j + 2, data->conf.floor, data);
-		data->conf.tex_parsed |= 16;
-	}
-	else if (ft_strncmp(line + j, "C ", 2) == 0)
-	{
-		if (data->conf.tex_parsed & 32)
-			error_exit("duplicate C", data);
-		parse_rgb(line + j + 2, data->conf.ceil, data);
-		data->conf.tex_parsed |= 32;
-	}
+}
+
+static void	parse_tex(char *line, int j, t_cube *data, int fd)
+{
+	if (ft_strncmp(line + j, "NO ", 3) == 0
+		|| ft_strncmp(line + j, "SO ", 3) == 0)
+		parse_tex_ns(line, j, data);
+	else if (ft_strncmp(line + j, "WE ", 3) == 0
+		|| ft_strncmp(line + j, "EA ", 3) == 0)
+		parse_tex_we(line, j, data);
 	else
-	{
-		free(line);
-		close(fd);
-		error_exit("unknown identifier", data);
-	}
+		parse_color(line, j, data, fd);
 }
 
 void	ft_parse_identifiers(t_cube *data)
@@ -143,18 +90,12 @@ void	ft_parse_identifiers(t_cube *data)
 		while (line[j] == ' ' || line[j] == '\t')
 			j++;
 		if (line[j] != '\n' && line[j] != '\0')
-			parse_line(line, j, data, fd);
+			parse_tex(line, j, data, fd);
 		free(line);
 		line = ft_get_next_line(fd);
 		i++;
 	}
 	free(line);
 	close(fd);
-	if (data->conf.tex_parsed != 63)
-	{
-		ft_printf("Error\nMissing identifier(s) (mask: %d/63)\n",
-			data->conf.tex_parsed);
-		free_game(data);
-		exit(EXIT_FAILURE);
-	}
+	check_all_parsed(data);
 }

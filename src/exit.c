@@ -6,7 +6,7 @@
 /*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:33 by celia             #+#    #+#             */
-/*   Updated: 2026/04/26 22:48:34 by celia            ###   ########.fr       */
+/*   Updated: 2026/04/28 15:08:05 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,13 @@ void	error_exit(char *msg, t_cube *data)
 	if (data)
 		free_game(data);
 	exit(EXIT_FAILURE);
+}
+
+int	ft_exit(void *param)
+{
+	t_cube	*data;
+
+	data = (t_cube *)param;
+	free_game(data);
+	exit(EXIT_SUCCESS);
 }
