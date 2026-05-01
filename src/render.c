@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 04:29:43 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/20 18:30:46 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/01 04:55:37 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	inside_map(double new_x, double new_y, t_cube *c)
 */
 static void	update_state(t_cube *c)
 {
-	double move_speed = 0.0005;
-	double rot_speed = 0.0003;
+	double move_speed = 0.05;
+	double rot_speed = 0.03;
 
 	if (c->keys.w)
 	{
@@ -65,8 +65,11 @@ int	render(t_cube *c)
 {
 	ft_memset(c->map_img.addr, 0,
 	MMAP_W * c->map_img.line_length);
+	ft_memset(c->view_img.addr, 0,
+	WIN_HEIGHT * c->view_img.line_length);
 	update_state(c);
 	fill_minimap(c);
+	mlx_put_image_to_window(c->mlx.mlx, c->mlx.win, c->view_img.img, 0, 0);
 	mlx_put_image_to_window(c->mlx.mlx, c->mlx.win, c->map_img.img, 40, 40);
 	return (0);
 }

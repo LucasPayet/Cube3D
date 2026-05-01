@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 21:52:57 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/21 17:09:13 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/01 04:20:15 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	draw_square(t_img *img, int start_x, int start_y, int size, int color)
 	int	y;
 	int	end_x = start_x + size;
 	int	end_y = start_y + size;
-	if (start_y < 0)
-		printf("%d %d %d %d\n", start_y, start_x, end_y, end_x);
+//	if (start_y < 0)
+//		printf("%d %d %d %d\n", start_y, start_x, end_y, end_x);
 
 	if (end_x <= 0 || end_y <= 0 ||
 		start_x >= img->x_len || start_y >= img->y_len)
@@ -57,7 +57,10 @@ void	draw_square(t_img *img, int start_x, int start_y, int size, int color)
 		x = start_x;
 		while (x < end_x)
 		{
-			update_pixel(img, x, y, color);
+			if (x == start_x || x == start_x + TILE || y == start_y || y == start_y + TILE)
+				update_pixel(img, x, y, 0x424242);
+			else
+				update_pixel(img, x, y, color);
 			x++;
 		}
 		y++;
@@ -107,18 +110,18 @@ void	fill_minimap(t_cube *cube)
 	int		px = floor(cube->cam.pos_x);
 	int		py = floor(cube->cam.pos_y);
 
-	double	frac_x = cube->cam.pos_x - px;
-	double	frac_y = cube->cam.pos_y - py;
+//	double	frac_x = cube->cam.pos_x - px;
+//	double	frac_y = cube->cam.pos_y - py;
 
-	double	offset_x = frac_x * TILE;
-	double	offset_y = frac_y * TILE;
+//	double	offset_x = frac_x * TILE;
+//	double	offset_y = frac_y * TILE;
 
-	int		start_x = px - 2;
-	int		start_y = py - 2;
+	int		start_x = px - (MMAP / 2);
+	int		start_y = py - (MMAP / 2);
 
-	for (int y = 0; y <= MMAP; y++)
+	for (int y = -1; y <= MMAP; y++)
 	{
-		for (int x = 0; x <= MMAP; x++)
+		for (int x = -1; x <= MMAP; x++)
 		{
 			int mx = start_x + x;
 			int my = start_y + y;
@@ -131,17 +134,36 @@ void	fill_minimap(t_cube *cube)
 				color = 0x00FFFFFF;
 			else
 				color = 0x00333333;
-			
-			int draw_x = x * TILE - offset_x;
-			int draw_y = y * TILE - offset_y;
-			if (y == 0 && x == 0)
-				printf("%lf %lf\n", offset_x, offset_y);
+			double world_x = mx;
+			double world_y = my;
+
+			double dx = world_x - cube->cam.pos_x;
+			double dy = world_y - cube->cam.pos_y;
+
+			int center = (MMAP * TILE) / 2;
+
+			int draw_x = center + dx * TILE;
+			int draw_y = center + dy * TILE;	
+			//int draw_x = x * TILE - offset_x;
+		//	int draw_y = y * TILE - offset_y;
+			//if (y == 0 && x == 0)
+			//	printf("%lf %lf\n", offset_x, offset_y);
 
 			draw_square(&cube->map_img, draw_x, draw_y, TILE, color);
 		}
 	}
     // draw player at center
-    int center = (MMAP * TILE) / 2;
-	draw_square(&cube->map_img, center - TILE / 4, center - TILE / 4, TILE / 2, 0x00FF0000);
+ //   int center = (MMAP * TILE) / 2;
+//	draw_square(&cube->map_img, center - TILE / 4, center - TILE / 4, TILE / 2, 0x00FF0000);
+	int	i;
+	double camera;
+	
+	i = 0;
+	while (i < WIN_WIDTH)
+	{
+		camera = 2 * i / (double)WIN_WIDTH - 1;
+		ray(cube, cube->cam.dir_x + cube->cam.plane_x * camera, cube->cam.dir_y + cube->cam.plane_y * camera, i);
+		i++;
+	}
 	draw_player_dir(cube);
 }

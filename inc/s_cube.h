@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/20 04:52:59 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/28 07:32:16 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@ typedef struct	s_mlx
 	void    *mlx;
 	void    *win;
 }	t_mlx;
+
+typedef struct s_pixel
+{
+	int	x;
+	int	y;
+	int	z;
+	int	color;
+}	t_pixel;
+
+typedef struct	s_ray
+{
+	int		map_x;
+	int		map_y;
+	double	frac_x;
+	double	frac_y;
+}	t_ray;
 
 typedef struct s_img
 {

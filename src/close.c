@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:40:04 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 22:21:32 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/04/24 23:28:59 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void free_map(char **map)
 {
-    int i = 0;
+    /*int i = 0;
 
     while (map[i])
     {
         free(map[i]);
         i++;
-    }
+    }*/
     free(map);
 }
 
