@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   minimap_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 18:40:04 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/04 03:07:10 by lupayet          ###   ########.fr       */
+/*   Created: 2026/05/01 08:41:12 by lupayet           #+#    #+#             */
+/*   Updated: 2026/05/01 08:41:35 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	free_map(char **map)
+t_pixel	minimap_pos(t_cube *c, double x, double y)
 {
-	free(map);
-}
+	t_pixel	p;
+	double	dx;
+	double	dy;
 
-int	close_cube(t_cube *c)
-{
-	if (c->mlx.mlx)
-	{
-		if (c->mlx.win)
-		{
-			mlx_destroy_window(c->mlx.mlx, c->mlx.win);
-			mlx_destroy_display(c->mlx.mlx);
-			free(c->mlx.mlx);
-		}
-	}
-	free_map(c->map.map);
-	exit(0);
-	return (0);
+	dx = x - c->cam.pos_x;
+	dy = y - c->cam.pos_y;
+	p.x = (CENTER + dx * TILE);
+	p.y = (CENTER + dy * TILE);
+	return (p);
 }

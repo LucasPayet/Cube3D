@@ -6,7 +6,7 @@
 #    By: lupayet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/04/27 05:52:52 by lupayet          ###   ########.fr        #
+#    Updated: 2026/05/04 05:54:26 by lupayet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_D = ./src/
 INC = ./inc/
 OBJ_D = ./obj/
 
-SRC	= main.c init.c close.c color.c minimap.c input.c pixel.c render.c raycast.c
+SRC	= main.c init.c close.c color.c minimap.c input.c pixel.c render.c \
+	  raycast.c draw_line.c minimap_util.c draw_square.c
 HEADER = cube.h s_cube.h
 
 OBJ	= $(addprefix $(OBJ_D), $(SRC:.c=.o))
