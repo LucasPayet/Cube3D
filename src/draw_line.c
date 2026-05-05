@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 07:10:10 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/04 03:22:51 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/05 11:43:56 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ void	draw_line(t_img *img, t_pixel p0, t_pixel p1, int color)
 	}
 }
 
-void	draw_vertical_line(t_img *img, t_vec4 v)
+void	draw_vertical_line(t_img *img, t_vert v)
 {
 	int	y;
 
-	y = v.b;
-	while (y <= v.c)
+	y = v.y_start;
+	while (y <= v.y_end)
 	{
-		update_pixel(img, v.a, y, v.d);
+		update_pixel(img, v.x, y, v.color);
 		y++;
 	}
 }

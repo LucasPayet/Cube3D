@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/04 06:07:57 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/05 11:41:34 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ typedef struct s_pixel
 	int	color;
 }	t_pixel;
 
-typedef struct s_vec4
+typedef struct s_vert
 {
-	int	a;
-	int	b;
-	int	c;
-	int	d;
-}	t_vec4;
+	int	x;
+	int	y_start;
+	int y_end;
+	int	color;
+}	t_vert;
 
 typedef struct draw
 {
@@ -142,6 +142,7 @@ typedef struct s_cube
 	t_keys	keys;
 	t_img	map_img;
 	t_img	view_img;
+	t_img	textures;
 }	t_cube;
 
 #endif

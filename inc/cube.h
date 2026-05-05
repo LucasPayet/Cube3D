@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/04 05:53:57 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/05 11:43:19 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		update_pixel(t_img *img, int x, int y, int color);
 //void	draw_line(t_img *img, int x0, int y0, int x1, int y1, int color);
 void	draw_square(t_img *img, int start_x, int start_y, int color);
 void	draw_line(t_img *img, t_pixel p0, t_pixel p1, int color);
-void	draw_vertical_line(t_img *img, t_vec4 v);
+void	draw_vertical_line(t_img *img, t_vert v);
 
 // RENDER
 int		render(t_cube *c);

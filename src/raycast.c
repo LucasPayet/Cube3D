@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:22:42 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/04 05:55:28 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/05 12:16:59 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	render3d(t_cube *c, t_ray *r, int x)
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	t_vec4	v;
+	t_vert	v;
 
 	line_height = (int)(WIN_HEIGHT / r->perp_wall_dist);
 	draw_start = -line_height / 2 + WIN_HEIGHT / 2;
@@ -71,11 +71,12 @@ void	render3d(t_cube *c, t_ray *r, int x)
 		draw_start = 0;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	v.a = x;
-	v.b = draw_start;
-	v.c = draw_end;
-	v.d = 0xFF0000;
+	v.x = x;
+	v.y_start = draw_start;
+	v.y_end = draw_end;
+	v.color = 0xFF0000;
 	draw_vertical_line(&c->view_img, v);
+	//draw_texture_line(c, v);
 }
 
 void	step_dir(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y)

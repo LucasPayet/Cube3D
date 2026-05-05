@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:17 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/04 06:15:38 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/05 11:38:10 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,8 @@ void	cube_init(t_cube *c, char *title)
 	init_cam(&c->cam);
 	c->map.width = 15;
 	c->map.height = 10;
+	c->textures.img = mlx_xpm_file_to_image(c->mlx.mlx, "./texture/test.xpm", &c->textures.x_len, &c->textures.y_len);
+	c->textures.addr = mlx_get_data_addr(c->textures.img,
+			&c->textures.bits_per_pixel, &c->textures.line_length,
+			&c->textures.endian);
 }
