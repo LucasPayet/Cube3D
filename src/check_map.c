@@ -6,7 +6,7 @@
 /*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 16:36:15 by celia             #+#    #+#             */
-/*   Updated: 2026/04/28 15:24:25 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/06 20:43:29 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_check_map(t_cube *data)
 	check_borders(data);
 	check_spaces(data);
 	copy = dup_map(data);
-	flood_fill(data, copy, data->cam.playerX, data->cam.playerY, dx, dy);
+	flood_fill(data, copy, data->cam.pos_x, data->cam.pos_y, dx, dy);
 	i = 0;
 	while (copy[i])
 		free(copy[i++]);

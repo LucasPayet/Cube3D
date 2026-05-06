@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:41:13 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/06 18:58:13 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/06 21:00:47 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_map_data(t_cube *data, char *name)
 {
 	data->map.height = 0;
 	data->map.width = 0;
-	data->cam.playerX = 0;
-	data->cam.playerY = 0;
+	data->cam.pos_x = 0;
+	data->cam.pos_y= 0;
 	data->map.fn = name;
 }
 
@@ -37,9 +37,9 @@ int main(int ac, char **av)
 	ft_read_map(&game);
 	ft_validate_map(&game);
 	ft_check_map(&game);
-	game.mlx.mlx = mlx_init();
-	game.mlx.win = mlx_new_window(game.mlx.mlx, game.map.width * 40, game.map.height * 40, "cub3D");
-	if (!game.mlx.win)
+	//game.mlx.mlx = mlx_init();
+	//game.mlx.win = mlx_new_window(game.mlx.mlx, game.map.width * 40, game.map.height * 40, "cub3D");
+	/*if (!game.mlx.win)
 	{
 		ft_printf("Error\nFailed to create window\n");
 		return (1);
@@ -49,10 +49,15 @@ int main(int ac, char **av)
 	{	
 		ft_printf("Error\nmalloc img failed\n");
     	return (1);
-	}
-	ft_create_map(&game);
-	mlx_hook(game.mlx.win, 17, 0, (int (*)(void))(void *)ft_exit, &game);
-	mlx_key_hook(game.mlx.win, press_key, &game);
+	}*/
+	//ft_create_map(&game);
+	//mlx_key_hook(game.mlx.win, press_key, &game);
+	cube_init(&game, av[1]);
+	mlx_do_key_autorepeatoff(game.mlx.mlx);
+	mlx_hook(game.mlx.win, 17, 0, (t_fn)(intptr_t)ft_exit, &game);
+	mlx_hook(game.mlx.win, 2, 1L << 0, (t_fn)(intptr_t)key_press, &game);
+	mlx_hook(game.mlx.win, 3, 1L << 1, (t_fn)(intptr_t)key_release, &game.keys);
+	mlx_loop_hook(game.mlx.mlx, (t_fn)(intptr_t)render, &game);
 	mlx_loop(game.mlx.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/05/06 18:47:51 by cbrice           ###   ########.fr        #
+#    Updated: 2026/05/06 21:03:43 by lupayet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 NAME = cub3D
 BIN_DIR = bin
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -lm
+
 RM = rm -f
 LIBFT_DIR = ./libft
 MAP ?= maps/valide/test.cub
@@ -36,10 +37,12 @@ endif
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC = ./src/main.c ./src/camera.c ./src/check_map_borders.c\
+SRC = ./src/main.c ./src/check_map_borders.c\
 	  ./src/check_map.c ./src/exit.c ./src/init_game.c ./src/init_map.c\
-      ./src/moving.c ./src/parse_rgb.c ./src/parsing_identifiers.c\
-	  ./src/parsing_map.c ./src/read_map.c
+	  ./src/parse_rgb.c ./src/parsing_identifiers.c\
+	  ./src/parsing_map.c ./src/read_map.c \
+	  ./src/init.c ./src/close.c ./src/color.c ./src/minimap.c ./src/input.c ./src/pixel.c ./src/render.c \
+	  ./src/raycast.c ./src/draw_line.c ./src/minimap_util.c ./src/draw_square.c
 
 all: $(BIN_DIR)/$(NAME) cub
 
@@ -69,7 +72,7 @@ $(LIBFT):
 	@make re -C $(LIBFT_DIR) 1>/dev/null
 	@echo "> LIBFT CREATED"
 
-$(BIN_DIR)/$(NAME): $(BIN_DIR) $(MLX_LIB) $(LIBFT)
+$(BIN_DIR)/$(NAME): $(BIN_DIR) $(MLX_LIB) $(LIBFT) $(SRC)
 	@echo "\nCOMPILING $(NAME)..."
 	@$(CC) $(SRC) $(CFLAGS) $(INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(BIN_DIR)/$(NAME)
 	@echo "> $(NAME) READY"

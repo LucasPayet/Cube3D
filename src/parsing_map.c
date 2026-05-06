@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:49:04 by celia             #+#    #+#             */
-/*   Updated: 2026/05/06 19:15:04 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/06 20:44:29 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	check_invalid_char(t_cube *data, char c)
 void	handle_spawn(t_cube *data, int x, int y, int *spawn_count)
 {
 	(*spawn_count)++;
-	data->cam.playerX = x;
-	data->cam.playerY = y;
+	data->cam.pos_x = x;
+	data->cam.pos_y = y;
 	data->map.spawn_dir = data->map.map[y][x];
 	data->map.map[y][x] = '0';
 }
