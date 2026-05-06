@@ -33,8 +33,8 @@ char	**create_map(void)
 
 void	init_cam(t_cam *cam)
 {
-	cam->pos_x = 13;
-	cam->pos_y = 8;
+	cam->pos_x += 0.5;
+	cam->pos_y += 0.5;
 	cam->dir_x = 1;
 	cam->dir_y = 0;
 	cam->plane_x = 0;
@@ -70,12 +70,6 @@ void	cube_init(t_cube *c, char *title)
 	c->view_img.x_len = WIN_WIDTH;
 	c->view_img.y_len = WIN_HEIGHT;
 	//c->map.map = create_map();
-	for (size_t i = 0; c->map.map[i]; i++)
-	{
-		printf("%s\n", c->map.map[i]);
-	}
-	
-	
 	init_keys(&c->keys);
 	init_cam(&c->cam);
 	//c->map.width = 15;
