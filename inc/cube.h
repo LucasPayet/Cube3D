@@ -6,23 +6,9 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/06 18:58:20 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/06 19:49:36 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #ifndef CUBE_H
-// # define CUBE_H
-
-// #include "s_cube.h"
-// #include "mlx.h"
-// #include "libft.h"
-// #include <stdlib.h>
-// #include <stdio.h>
-// #include <fcntl.h>
-// #include <math.h>
-
-// # define WIN_WIDTH 1280
-// # define WIN_HEIGHT 720
 
 #ifndef CUBE_H
 # define CUBE_H
@@ -70,54 +56,52 @@
 #  define DOWN   65364
 # endif
 
+//camera.c
+// void	update_time(t_cube *data);
+// void	camera_dir(t_cube *game);
 
+//check_map_border.c
+void	check_borders(t_cube *data);
+void	check_spaces(t_cube *data);
 
-//moving
+//check_map.c
+void	ft_check_map(t_cube *data);
+char    **dup_map(t_cube *data);
+
+//exit.c
+void	free_game(t_cube *data);
+void	error_exit(char *msg, t_cube *data);
 int		ft_exit(void *param);
 
-void	move_w(t_cube *data);
-void	move_s(t_cube *data);
-void	move_a(t_cube *data);
-void	move_d(t_cube *data);
-
-int     press_key(int keycode, void *data);
-
-//init_game
-void	put_player_img(t_cube *data, int *j, int *i);
-void	put_wall_img(t_cube *data, int *j, int *i);
-void	put_empty_img(t_cube *data, int *j, int *i);
+//init_game.c
 void	ft_create_map(t_cube *data);
 
-//init_map
+//init_map.c
 void	ft_map_height(t_cube *data);
 char	*trim_newline(char *line);
-void	ft_read_map(t_cube *data);
-void	ft_find_player_position(t_cube *data);
 
-//main
+//main.c
 void	ft_map_data(t_cube *data, char *name);
 int		main(int ac, char **av);
 
-//parsing
-void	ft_check_format(t_cube *game);
-void    ft_parse_identifiers(t_cube *data);
+//moving.c
+int		press_key(int keycode, void *game);
 
-void	ft_validate_map(t_cube *data);
-void	ft_check_map(t_cube *data);
+//parse_rgb.c
+void    parse_color(char *line, int j, t_cube *data, int fd);
+char	*get_tex_path(char *line);
+void	parse_rgb(char *str, int rgb[3], t_cube *data);
 
-void	ft_init_player_dir(t_cube *data);
+//parsing_identifiers.c
+void	ft_parse_identifiers(t_cube *data);
 
-void	free_game(t_cube *data);
-void	error_exit(char *msg, t_cube *data);
-
-void	init_dirs(int dx[4], int dy[4]);
+//parsing_map.c
 void	check_invalid_char(t_cube *data, char c);
 void	handle_spawn(t_cube *data, int x, int y, int *spawn_count);
-void    parse_color(char *line, int j, t_cube *data, int fd);
-void	check_borders(t_cube *data);
-void	check_spaces(t_cube *data);
-char    **dup_map(t_cube *data);
-void	parse_rgb(char *str, int rgb[3], t_cube *data);
-char	*get_tex_path(char *line);
+void	ft_validate_map(t_cube *data);
+void	init_dirs(int dx[4], int dy[4]);
+
+//read_map.c
+void	ft_read_map(t_cube *data);
 
 #endif
