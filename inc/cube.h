@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/28 15:28:39 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/06 18:58:20 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	ft_read_map(t_cube *data);
 void	ft_find_player_position(t_cube *data);
 
 //main
-void	ft_parse_map(t_cube *data);
 void	ft_map_data(t_cube *data, char *name);
 int		main(int ac, char **av);
 

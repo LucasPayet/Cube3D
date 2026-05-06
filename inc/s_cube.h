@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/19 20:37:46 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/06 19:01:08 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,12 @@ typedef struct s_img
         int             y_len;
 
 		int		on_exit;
-
-		void	*exit;
-		void	*collect;
-		void	*wall;
-		void	*empty;
-		void	*player;
 } t_img;
 
 typedef struct s_map
 {
         int             width;
         int             height;
-        // int             fd;
 		
 		int				map_start;
 		

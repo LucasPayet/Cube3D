@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:41:13 by lupayet           #+#    #+#             */
-/*   Updated: 2026/04/28 15:09:13 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/06 18:58:13 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-void	ft_parse_map(t_cube *data)
-{
-	data->img->wall = mlx_xpm_file_to_image(data->mlx.mlx, data->conf.tex_no,
-		&data->img->x_len, &data->img->y_len);
-	if (!data->img->wall)
-	{
-		ft_printf("Error: failed to load NO texture: %s\n", data->conf.tex_no);
-		exit(EXIT_FAILURE);
-	}
-	data->img->empty = mlx_xpm_file_to_image(data->mlx.mlx,
-		data->conf.tex_so, &data->img->x_len, &data->img->y_len);
-	data->img->player = mlx_xpm_file_to_image(data->mlx.mlx,
-		data->conf.tex_we, &data->img->x_len, &data->img->y_len);
-	data->img->exit = mlx_xpm_file_to_image(data->mlx.mlx,
-		data->conf.tex_ea, &data->img->x_len, &data->img->y_len);
-}
 
 void	ft_map_data(t_cube *data, char *name)
 {
@@ -67,7 +50,6 @@ int main(int ac, char **av)
 		ft_printf("Error\nmalloc img failed\n");
     	return (1);
 	}
-	ft_parse_map(&game);
 	ft_create_map(&game);
 	mlx_hook(game.mlx.win, 17, 0, (int (*)(void))(void *)ft_exit, &game);
 	mlx_key_hook(game.mlx.win, press_key, &game);

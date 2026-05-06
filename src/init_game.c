@@ -3,38 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:40 by celia             #+#    #+#             */
-/*   Updated: 2026/04/28 15:07:55 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/06 19:00:23 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-void	put_player_img(t_cube *data, int *j, int *i)
-{
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win,
-		data->img->player, (*j) * 40, (*i) * 40);
-	if (!data->img->player)
-	{
-		ft_printf("Failed to load player image");
-	}
-}
-
-void	put_wall_img(t_cube *data, int *j, int *i)
-{
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win,
-		data->img->wall, (*j) * 40, (*i) * 40);
-}
-
-void	put_empty_img(t_cube *data, int *j, int *i)
-{
-	if (!data->img->empty)
-		return ;
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win,
-		data->img->empty, (*j) * 40, (*i) * 40);
-}
 
 static int	get_color(int rgb[3])
 {
