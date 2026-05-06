@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moving.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:55 by celia             #+#    #+#             */
-/*   Updated: 2026/04/28 15:26:25 by celia            ###   ########.fr       */
+/*   Updated: 2026/04/30 19:13:19 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ int	press_key(int keycode, void *game)
 	if (keycode == ESC || keycode == Q)
 		ft_exit(data);
 	move_dir(data, keycode);
-	mlx_clear_window(data->mlx.mlx, data->mlx.win);
 	return (0);
 }
