@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:17 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/05 11:38:10 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/06 20:43:56 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char	**create_map(void)
 	return (map);
 }
 
-static void	init_cam(t_cam *cam)
+void	init_cam(t_cam *cam)
 {
-	cam->pos_x = 13;
-	cam->pos_y = 8;
+	cam->pos_x += 0.5;
+	cam->pos_y += 0.5;
 	cam->dir_x = 1;
 	cam->dir_y = 0;
 	cam->plane_x = 0;
@@ -69,11 +69,11 @@ void	cube_init(t_cube *c, char *title)
 	c->map_img.y_len = MMAP_H;
 	c->view_img.x_len = WIN_WIDTH;
 	c->view_img.y_len = WIN_HEIGHT;
-	c->map.map = create_map();
+	//c->map.map = create_map();
 	init_keys(&c->keys);
 	init_cam(&c->cam);
-	c->map.width = 15;
-	c->map.height = 10;
+	//c->map.width = 15;
+	//c->map.height = 10;
 	c->textures.img = mlx_xpm_file_to_image(c->mlx.mlx, "./texture/test.xpm", &c->textures.x_len, &c->textures.y_len);
 	c->textures.addr = mlx_get_data_addr(c->textures.img,
 			&c->textures.bits_per_pixel, &c->textures.line_length,

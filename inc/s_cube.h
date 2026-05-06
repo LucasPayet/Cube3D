@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/06 18:04:24 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/06 20:29:42 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef	int (*t_fn)(void);
 
-typedef struct s_mlx
+typedef	struct s_mlx
 {
 	void	*mlx;
 	void	*win;
@@ -102,15 +102,36 @@ typedef struct s_img
 	int		endian;
 	int		x_len;
 	int		y_len;
-}	t_img;
+	int		on_exit;
+} t_img;
+
+/*typedef struct	s_cam
+{	
+	double	perpWallDist;
+	double	frameTime;
+	long	time;
+	long	oldTime;
+
+	int		side;
+
+	double	deltaDistX;
+	double	deltaDistY;
+
+	double sideDistX;
+	double sideDistY;
+	
+	int		playerX;
+	int		playerY;
+} t_cam;*/
 
 typedef struct s_map
 {
 	int		width;
 	int		height;
-	int		fd;
-	char	*line;
-	char	**split;
+	int		map_start;
+		
+	char	spawn_dir;
+	char	*fn;
 	char	**map;
 }	t_map;
 
@@ -136,6 +157,16 @@ typedef struct s_keys
 	int	right;
 }	t_keys;
 
+typedef	struct s_conf{
+	char	*tex_no;
+	char	*tex_so;
+	char	*tex_we;
+	char	*tex_ea;
+	int		floor[3];
+	int		ceil[3];
+	int		tex_parsed;
+}t_conf;
+
 typedef struct s_cube
 {
 	t_mlx	mlx;
@@ -145,16 +176,8 @@ typedef struct s_cube
 	t_img	map_img;
 	t_img	view_img;
 	t_img	textures;
+	t_img	*img;
+	t_conf	conf;
 }	t_cube;
-
-typedef	struct s_conf{
-	char	*tex_no;
-	char	*tex_so;
-	char	*tex_we;
-	char	*tex_ea;
-	int		floor[3];
-	int		ceil[3];
-	int		tex_parsed; //bitmask : 1=NO 2=SO 4=WE 8=EA 16=F 32=C
-}t_conf;
 
 #endif
