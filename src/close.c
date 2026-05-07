@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:40:04 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/05 11:21:13 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/07 01:53:43 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ int	close_cube(t_cube *c)
 	if (c->mlx.mlx)
 	{
 		if (c->mlx.win)
-		{
 			mlx_destroy_window(c->mlx.mlx, c->mlx.win);
-			mlx_destroy_display(c->mlx.mlx);
-			free(c->mlx.mlx);
-		}
+		mlx_destroy_disp(c->mlx.mlx);
+		free(c->mlx.mlx);
 	}
 	free_map(c->map.map);
 	exit(0);

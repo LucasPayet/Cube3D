@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/06 20:13:22 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/07 01:53:06 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <math.h>
 
 # ifdef __APPLE__
-#  include "../mlx/mlx.h"
+#  include "../mlx_mac/mlx.h"
 # else
 #  include "../mlx/mlx.h"
 #  include <X11/X.h>
@@ -49,6 +49,7 @@
 #  define RIGHT  124
 #  define UP     126
 #  define DOWN   125
+#  define mlx_destroy_disp(mlx)		(void)(mlx)
 # else
 #  define ESC    65307
 #  define Q      113
@@ -60,6 +61,7 @@
 #  define RIGHT  65363
 #  define UP     65362
 #  define DOWN   65364
+#  define mlx_destroy_disp(mlx)		mlx_destroy_display(mlx)
 # endif
 
 //camera.c
