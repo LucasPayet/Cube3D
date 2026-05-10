@@ -75,6 +75,8 @@ void	render3d(t_cube *c, t_ray *r, int x)
 	v.y_start = draw_start;
 	v.y_end = draw_end;
 	v.color = 0xFF0000;
+	if (r->side)
+		v.color = 0x0000FF;
 	draw_vertical_line(&c->view_img, v);
 	//draw_texture_line(c, v);
 }
