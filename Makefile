@@ -6,7 +6,7 @@
 #    By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/05/06 21:03:43 by lupayet          ###   ########.fr        #
+#    Updated: 2026/05/12 05:27:08 by lupayet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRC = ./src/main.c ./src/check_map_borders.c\
 	  ./src/parse_rgb.c ./src/parsing_identifiers.c\
 	  ./src/parsing_map.c ./src/read_map.c \
 	  ./src/init.c ./src/close.c ./src/color.c ./src/minimap.c ./src/input.c ./src/pixel.c ./src/render.c \
-	  ./src/raycast.c ./src/draw_line.c ./src/minimap_util.c ./src/draw_square.c
+	  ./src/raycast.c ./src/draw_line.c ./src/minimap_util.c ./src/draw_square.c \
+	  ./src/texture.c
 
 all: $(BIN_DIR)/$(NAME) cub
 

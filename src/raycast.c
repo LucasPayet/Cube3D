@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:22:42 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/05 12:16:59 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/12 05:33:48 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,26 @@ void	draw_fov(t_cube *c, t_ray *r)
 
 void	render3d(t_cube *c, t_ray *r, int x)
 {
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
 	t_vert	v;
 
-	line_height = (int)(WIN_HEIGHT / r->perp_wall_dist);
-	draw_start = -line_height / 2 + WIN_HEIGHT / 2;
-	draw_end = line_height / 2 + WIN_HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= WIN_HEIGHT)
-		draw_end = WIN_HEIGHT - 1;
+	v.line_height = (int)(WIN_HEIGHT / r->perp_wall_dist);
+	v.draw_start = -v.line_height / 2 + WIN_HEIGHT / 2;
+	v.draw_end = v.line_height / 2 + WIN_HEIGHT / 2;
+	if (v.draw_start < 0)
+		v.draw_start = 0;
+	if (v.draw_end >= WIN_HEIGHT)
+		v.draw_end = WIN_HEIGHT - 1;
 	v.x = x;
-	v.y_start = draw_start;
-	v.y_end = draw_end;
 	v.color = 0xFF0000;
 	if (r->side)
 		v.color = 0x0000FF;
-	draw_vertical_line(&c->view_img, v);
-	//draw_texture_line(c, v);
+	//draw_vertical_line(&c->view_img, v);
+	draw_texture_line(c, r, v);
 }
 
-void	step_dir(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y)
+void	step_dir(t_cube *c, t_ray *r)
 {
-	if (ray_dir_x < 0)
+	if (r->dir_x < 0)
 	{
 		r->step_x = -1;
 		r->side_dist_x = (c->cam.pos_x - r->map_x) * r->delta_dist_x;
@@ -93,7 +88,7 @@ void	step_dir(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y)
 		r->step_x = 1;
 		r->side_dist_x = (r->map_x + 1.0 - c->cam.pos_x) * r->delta_dist_x;
 	}
-	if (ray_dir_y < 0)
+	if (r->dir_y < 0)
 	{
 		r->step_y = -1;
 		r->side_dist_y = (c->cam.pos_y - r->map_y) * r->delta_dist_y;
@@ -105,30 +100,28 @@ void	step_dir(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y)
 	}
 }
 
-void	ray(t_cube *c, double ray_dir_x, double ray_dir_y, int x)
+void	ray(t_cube *c, t_ray *r, int x)
 {
-	t_ray		r;
-
-	r.map_x = (int)floor(c->cam.pos_x);
-	r.map_y = (int)floor(c->cam.pos_y);
-	if (ray_dir_x == 0)
-		r.delta_dist_x = 1e30;
+	r->map_x = (int)floor(c->cam.pos_x);
+	r->map_y = (int)floor(c->cam.pos_y);
+	if (r->dir_x == 0)
+		r->delta_dist_x = 1e30;
 	else
-		r.delta_dist_x = fabs(1 / ray_dir_x);
-	if (ray_dir_y == 0)
-		r.delta_dist_y = 1e30;
+		r->delta_dist_x = fabs(1 / r->dir_x);
+	if (r->dir_y == 0)
+		r->delta_dist_y = 1e30;
 	else
-		r.delta_dist_y = fabs(1 / ray_dir_y);
-	step_dir(c, &r, ray_dir_x, ray_dir_y);
-	dda_loop(c, &r);
-	if (r.side == 0)
-		r.perp_wall_dist = (r.map_x - c->cam.pos_x + (1 - r.step_x) / 2)
-			/ ray_dir_x;
+		r->delta_dist_y = fabs(1 / r->dir_y);
+	step_dir(c, r);
+	dda_loop(c, r);
+	if (r->side == 0)
+		r->perp_wall_dist = (r->map_x - c->cam.pos_x + (1 - r->step_x) / 2)
+			/ r->dir_x;
 	else
-		r.perp_wall_dist = (r.map_y - c->cam.pos_y + (1 - r.step_y) / 2)
-			/ ray_dir_y;
-	r.hit_x = c->cam.pos_x + ray_dir_x * r.perp_wall_dist;
-	r.hit_y = c->cam.pos_y + ray_dir_y * r.perp_wall_dist;
-	draw_fov(c, &r);
-	render3d(c, &r, x);
+		r->perp_wall_dist = (r->map_y - c->cam.pos_y + (1 - r->step_y) / 2)
+			/ r->dir_y;
+	r->hit_x = c->cam.pos_x + r->dir_x * r->perp_wall_dist;
+	r->hit_y = c->cam.pos_y + r->dir_y * r->perp_wall_dist;
+	draw_fov(c, r);
+	render3d(c, r, x);
 }
