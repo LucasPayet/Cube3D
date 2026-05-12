@@ -3,44 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:17 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/06 20:43:56 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/10 17:37:08 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-char	**create_map(void)
+static void	set_cam_dir(t_cube *c)
 {
-	char	**map;
-
-	map = malloc(sizeof(char *) * 11);
-	map[0] = "111111111111111";
-	map[1] = "100000000000001";
-	map[2] = "100000000000001";
-	map[3] = "100000100000001";
-	map[4] = "100000000000001";
-	map[5] = "100000010000001";
-	map[6] = "100001000000001";
-	map[7] = "100000000000001";
-	map[8] = "100000000000001";
-	map[9] = "111111111111111";
-	map[10] = NULL;
-	return (map);
+	if (c->map.spawn_dir == 'N')
+	{
+		c->cam.dir_x = 0; c->cam.dir_y = -1;
+		c->cam.plane_x = 0.66; c->cam.plane_y = 0;
+	}
+	else if (c->map.spawn_dir == 'S')
+	{
+		c->cam.dir_x = 0; c->cam.dir_y = 1;
+		c->cam.plane_x = -0.66; c->cam.plane_y = 0;
+	}
+	else if (c->map.spawn_dir == 'E')
+	{
+		c->cam.dir_x = 1; c->cam.dir_y = 0;
+		c->cam.plane_x = 0; c->cam.plane_y = 0.66;
+	}
+	else if (c->map.spawn_dir == 'W')
+	{
+		c->cam.dir_x = -1; c->cam.dir_y = 0;
+		c->cam.plane_x = 0; c->cam.plane_y = -0.66;
+	}
 }
 
-void	init_cam(t_cam *cam)
+void	init_cam(t_cube *c)
 {
-	cam->pos_x += 0.5;
-	cam->pos_y += 0.5;
-	cam->dir_x = 1;
-	cam->dir_y = 0;
-	cam->plane_x = 0;
-	cam->plane_y = 0.66;
-	cam->move_speed = 0.05;
-	cam->rot_speed = 0.03;
+	c->cam.pos_x += 0.5;
+	c->cam.pos_y += 0.5;
+	set_cam_dir(c);
+	c->cam.move_speed = 0.05;
+	c->cam.rot_speed = 0.03;
 }
 
 static void	init_keys(t_keys *k)
@@ -53,10 +55,8 @@ static void	init_keys(t_keys *k)
 	k->right = 0;
 }
 
-void	cube_init(t_cube *c, char *title)
+static void	init_images(t_cube *c)
 {
-	c->mlx.mlx = mlx_init();
-	c->mlx.win = mlx_new_window(c->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, title);
 	c->map_img.img = mlx_new_image(c->mlx.mlx, MMAP_W, MMAP_H);
 	c->map_img.addr = mlx_get_data_addr(c->map_img.img,
 			&c->map_img.bits_per_pixel, &c->map_img.line_length,
@@ -69,13 +69,37 @@ void	cube_init(t_cube *c, char *title)
 	c->map_img.y_len = MMAP_H;
 	c->view_img.x_len = WIN_WIDTH;
 	c->view_img.y_len = WIN_HEIGHT;
-	//c->map.map = create_map();
+}
+
+static void	init_textures(t_cube *c)
+{
+	int		i;
+	char	*paths[4];
+
+	paths[0] = c->conf.tex_no;
+	paths[1] = c->conf.tex_so;
+	paths[2] = c->conf.tex_we;
+	paths[3] = c->conf.tex_ea;
+	i = 0;
+	while (i < 4)
+	{
+		c->tex[i].img = mlx_xpm_file_to_image(c->mlx.mlx,
+				paths[i], &c->tex[i].x_len, &c->tex[i].y_len);
+		if (!c->tex[i].img)
+			error_exit("failed to load texture", c);
+		c->tex[i].addr = mlx_get_data_addr(c->tex[i].img,
+				&c->tex[i].bits_per_pixel, &c->tex[i].line_length,
+				&c->tex[i].endian);
+		i++;
+	}
+}
+
+void	cube_init(t_cube *c, char *title)
+{
+	c->mlx.mlx = mlx_init();
+	c->mlx.win = mlx_new_window(c->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, title);
+	init_images(c);
 	init_keys(&c->keys);
-	init_cam(&c->cam);
-	//c->map.width = 15;
-	//c->map.height = 10;
-	c->textures.img = mlx_xpm_file_to_image(c->mlx.mlx, "./texture/test.xpm", &c->textures.x_len, &c->textures.y_len);
-	c->textures.addr = mlx_get_data_addr(c->textures.img,
-			&c->textures.bits_per_pixel, &c->textures.line_length,
-			&c->textures.endian);
+	init_cam(c);
+	init_textures(c);
 }

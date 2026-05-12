@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:41:13 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/06 21:00:47 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/10 17:22:51 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_map_data(t_cube *data, char *name)
 	data->map.height = 0;
 	data->map.width = 0;
 	data->cam.pos_x = 0;
-	data->cam.pos_y= 0;
+	data->cam.pos_y = 0;
 	data->map.fn = name;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_cube game;
+	t_cube	game;
 
 	ft_memset(&game, 0, sizeof(t_cube));
 	if (ac != 2 || !av[1])
@@ -37,21 +37,6 @@ int main(int ac, char **av)
 	ft_read_map(&game);
 	ft_validate_map(&game);
 	ft_check_map(&game);
-	//game.mlx.mlx = mlx_init();
-	//game.mlx.win = mlx_new_window(game.mlx.mlx, game.map.width * 40, game.map.height * 40, "cub3D");
-	/*if (!game.mlx.win)
-	{
-		ft_printf("Error\nFailed to create window\n");
-		return (1);
-	}
-	game.img = ft_calloc(1, sizeof(t_img));
-	if (!game.img)
-	{	
-		ft_printf("Error\nmalloc img failed\n");
-    	return (1);
-	}*/
-	//ft_create_map(&game);
-	//mlx_key_hook(game.mlx.win, press_key, &game);
 	cube_init(&game, av[1]);
 	mlx_do_key_autorepeatoff(game.mlx.mlx);
 	mlx_hook(game.mlx.win, 17, 0, (t_fn)(intptr_t)ft_exit, &game);

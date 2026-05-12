@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:49:04 by celia             #+#    #+#             */
-/*   Updated: 2026/05/06 20:44:29 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/10 17:33:11 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	handle_spawn(t_cube *data, int x, int y, int *spawn_count)
 	data->map.spawn_dir = data->map.map[y][x];
 	data->map.map[y][x] = '0';
 }
-
 
 void	ft_validate_map(t_cube *data)
 {
@@ -60,7 +59,6 @@ void	ft_validate_map(t_cube *data)
 	if (spawn_count > 1)
 		error_exit("multiple spawn points", data);
 }
-
 
 void	init_dirs(int dx[4], int dy[4])
 {

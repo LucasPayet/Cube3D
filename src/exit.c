@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
+/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:33 by celia             #+#    #+#             */
-/*   Updated: 2026/05/06 19:09:22 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/11 23:19:23 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	free_game(t_cube *data)
 			free(data->map.map[i++]);
 		free(data->map.map);
 	}
-	if (data->img)
-		free(data->img);
 }
 
 void	error_exit(char *msg, t_cube *data)

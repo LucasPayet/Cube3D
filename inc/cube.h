@@ -6,7 +6,7 @@
 /*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/07 01:53:06 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/12 15:38:45 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 #  define RIGHT  124
 #  define UP     126
 #  define DOWN   125
-#  define mlx_destroy_disp(mlx)		(void)(mlx)
+// #  define mlx_destroy_disp(mlx)		(void)(mlx)
 # else
 #  define ESC    65307
 #  define Q      113
@@ -61,7 +61,7 @@
 #  define RIGHT  65363
 #  define UP     65362
 #  define DOWN   65364
-#  define mlx_destroy_disp(mlx)		mlx_destroy_display(mlx)
+// #  define mlx_destroy_disp(mlx)		mlx_destroy_display(mlx)
 # endif
 
 //camera.c
@@ -81,6 +81,9 @@ void	free_game(t_cube *data);
 void	error_exit(char *msg, t_cube *data);
 int		ft_exit(void *param);
 
+//init_cam.c
+void	init_cam(t_cube *c);
+
 //init_game.c
 void	ft_create_map(t_cube *data);
 
@@ -92,8 +95,8 @@ char	*trim_newline(char *line);
 void	ft_map_data(t_cube *data, char *name);
 int		main(int ac, char **av);
 
-//moving.c
-int		press_key(int keycode, void *game);
+// //moving.c
+// int		press_key(int keycode, void *game);
 
 //parse_rgb.c
 void    parse_color(char *line, int j, t_cube *data, int fd);
@@ -112,9 +115,14 @@ void	init_dirs(int dx[4], int dy[4]);
 //read_map.c
 void	ft_read_map(t_cube *data);
 
+//texture.c
+void	draw_tex_line(t_cube *c, t_ray *r, t_draw_tex *d);
+void	calc_tex(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y);
+
 //lupayet
 void	cube_init(t_cube *c, char *title);
 int		close_cube(t_cube *c);
+void	ft_mlx_destroy(void *mlx);
 
 int		hex_rgb_to_int(char *hex);
 
@@ -123,6 +131,7 @@ void	fill_minimap(t_cube *c);
 // INPUT
 int		key_press(int keycode, t_cube *c);
 int		key_release(int keycode, t_keys *k);
+void	rotate(t_cube *c, double rot);
 
 // PIXEL
 int		update_pixel(t_img *img, int x, int y, int color);
