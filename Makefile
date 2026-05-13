@@ -6,7 +6,7 @@
 #    By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/05/13 17:21:50 by cbrice           ###   ########.fr        #
+#    Updated: 2026/05/13 18:29:30 by cbrice           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ endif
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC = ./src/main.c ./src/check_map_borders.c\
-	  ./src/check_map.c ./src/exit.c ./src/init_cam.c ./src/init_game.c ./src/init_map.c\
+	  ./src/check_map.c ./src/exit.c ./src/init_cam.c ./src/init_map.c\
 	  ./src/parse_rgb.c ./src/parsing_identifiers.c\
 	  ./src/parsing_map.c ./src/read_map.c \
-	  ./src/init.c ./src/close.c ./src/color.c ./src/minimap.c ./src/input.c ./src/pixel.c ./src/render.c \
+	  ./src/init.c ./src/color.c ./src/minimap.c ./src/input.c ./src/pixel.c ./src/render.c \
 	  ./src/texture.c ./src/raycast.c ./src/draw_line.c ./src/minimap_util.c ./src/draw_square.c
 
 all: $(BIN_DIR)/$(NAME) cub

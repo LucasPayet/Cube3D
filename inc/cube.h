@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/13 16:07:30 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/13 18:29:16 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,6 @@ void	check_spaces(t_cube *data);
 void	ft_check_map(t_cube *data);
 char	**dup_map(t_cube *data);
 
-//close.c
-void	free_map(char **map);
-int		close_cube(t_cube *c);
-
 //color.c
 int		hex_to_int(char c);
 int		hex_rgb_to_int(char *hex);
@@ -92,15 +88,13 @@ void	draw_vertical_line(t_img *img, t_vert v);
 void	draw_square(t_img *img, int start_x, int start_y, int color);
 
 //exit.c
+int		close_cube(t_cube *c);
 void	free_game(t_cube *data);
 void	error_exit(char *msg, t_cube *data);
 int		ft_exit(void *param);
 
 //init_cam.c
 void	init_cam(t_cube *c);
-
-//init_game.c
-void	ft_create_map(t_cube *data);
 
 //init_map.c
 void	ft_map_height(t_cube *data);
