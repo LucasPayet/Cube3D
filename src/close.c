@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:40:04 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/12 15:38:33 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/13 15:41:50 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-// void	ft_mlx_destroy(void *mlx)
-// {
-// # ifndef __APPLE__
-// 	mlx_destroy_display(mlx);
-	
-// # endif
-// 	free(mlx);
-// }
 
 void	free_map(char **map)
 {
@@ -43,7 +34,8 @@ int	close_cube(t_cube *c)
 		mlx_destroy_image(c->mlx.mlx, c->view_img.img);
 	if (c->mlx.win)
 		mlx_destroy_window(c->mlx.mlx, c->mlx.win);
-	ft_mlx_destroy(c->mlx.mlx);
+	mlx_destroy_display(c->mlx.mlx);
+	free(c->mlx.mlx);
 	free_game(c);
 	exit(0);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/12 15:38:45 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/13 16:07:30 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdint.h>
 
 # ifdef __APPLE__
 #  include "../mlx_mac/mlx.h"
@@ -64,17 +65,31 @@
 // #  define mlx_destroy_disp(mlx)		mlx_destroy_display(mlx)
 # endif
 
-//camera.c
-// void	update_time(t_cube *data);
-// void	camera_dir(t_cube *game);
-
 //check_map_border.c
 void	check_borders(t_cube *data);
 void	check_spaces(t_cube *data);
 
 //check_map.c
 void	ft_check_map(t_cube *data);
-char    **dup_map(t_cube *data);
+char	**dup_map(t_cube *data);
+
+//close.c
+void	free_map(char **map);
+int		close_cube(t_cube *c);
+
+//color.c
+int		hex_to_int(char c);
+int		hex_rgb_to_int(char *hex);
+
+//draw_line.c
+int		ft_abs(int n);
+int		slope(int n0, int n1);
+void	direction(t_draw *dr, t_pixel *p0);
+void	draw_line(t_img *img, t_pixel p0, t_pixel p1, int color);
+void	draw_vertical_line(t_img *img, t_vert v);
+
+//draw_square.c
+void	draw_square(t_img *img, int start_x, int start_y, int color);
 
 //exit.c
 void	free_game(t_cube *data);
@@ -91,15 +106,29 @@ void	ft_create_map(t_cube *data);
 void	ft_map_height(t_cube *data);
 char	*trim_newline(char *line);
 
+//init.c
+void	cube_init(t_cube *c, char *title);
+
+//input.c
+int		key_press(int keycode, t_cube *c);
+int		key_release(int keycode, t_keys *k);
+void	rotate(t_cube *c, double rot);
+
 //main.c
 void	ft_map_data(t_cube *data, char *name);
 int		main(int ac, char **av);
 
-// //moving.c
-// int		press_key(int keycode, void *game);
+//minimap_util.c
+t_pixel	minimap_pos(t_cube *c, double x, double y);
+
+//minimap.c
+void	draw_player_dir(t_cube *c);
+void	minimap_loop(t_cube *cube, t_minimap *m);
+void	renderd(t_cube *cube);
+void	fill_minimap(t_cube *cube);
 
 //parse_rgb.c
-void    parse_color(char *line, int j, t_cube *data, int fd);
+void	parse_color(char *line, int j, t_cube *data, int fd);
 char	*get_tex_path(char *line);
 void	parse_rgb(char *str, int rgb[3], t_cube *data);
 
@@ -112,36 +141,24 @@ void	handle_spawn(t_cube *data, int x, int y, int *spawn_count);
 void	ft_validate_map(t_cube *data);
 void	init_dirs(int dx[4], int dy[4]);
 
+//pixel.c
+int		update_pixel(t_img *img, int x, int y, int color);
+
+//raycast.c 
+void	dda_loop(t_cube *c, t_ray *r);
+void	draw_fov(t_cube *c, t_ray *r);
+void	step_dir(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y);
+void	render3d(t_cube *c, t_ray *r, int x);
+void	ray(t_cube *c, double ray_dir_x, double ray_dir_y, int x);
+
 //read_map.c
 void	ft_read_map(t_cube *data);
+
+//render.c
+int		render(t_cube *c);
 
 //texture.c
 void	draw_tex_line(t_cube *c, t_ray *r, t_draw_tex *d);
 void	calc_tex(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y);
 
-//lupayet
-void	cube_init(t_cube *c, char *title);
-int		close_cube(t_cube *c);
-void	ft_mlx_destroy(void *mlx);
-
-int		hex_rgb_to_int(char *hex);
-
-void	fill_minimap(t_cube *c);
-
-// INPUT
-int		key_press(int keycode, t_cube *c);
-int		key_release(int keycode, t_keys *k);
-void	rotate(t_cube *c, double rot);
-
-// PIXEL
-int		update_pixel(t_img *img, int x, int y, int color);
-//void	draw_line(t_img *img, int x0, int y0, int x1, int y1, int color);
-void	draw_square(t_img *img, int start_x, int start_y, int color);
-void	draw_line(t_img *img, t_pixel p0, t_pixel p1, int color);
-void	draw_vertical_line(t_img *img, t_vert v);
-
-// RENDER
-int		render(t_cube *c);
-void	ray(t_cube *c, double ray_dir_x, double ray_dir_y, int x);
-t_pixel	minimap_pos(t_cube *c, double x, double y);
 #endif

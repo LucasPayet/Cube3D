@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_borders.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:50:27 by celia             #+#    #+#             */
-/*   Updated: 2026/04/28 15:23:15 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/13 15:28:20 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ void	check_borders(t_cube *data)
 	}
 }
 
-static void	check_cell_neighbors(t_cube *data, int x, int y,
-				int dx[4], int dy[4])
+static void	check_cell_neighbors(t_cube *data, int x, int y)
 {
-	int	i;
-	int	nx;
-	int	ny;
+	int		dx[4];
+	int		dy[4];
+	int		i;
+	int		nx;
+	int		ny;
 
+	init_dirs(dx, dy);
 	i = 0;
 	while (i < 4)
 	{
@@ -59,12 +61,9 @@ static void	check_cell_neighbors(t_cube *data, int x, int y,
 
 void	check_spaces(t_cube *data)
 {
-	int	dx[4];
-	int	dy[4];
 	int	y;
 	int	x;
 
-	init_dirs(dx, dy);
 	y = 0;
 	while (y < data->map.height)
 	{
@@ -72,7 +71,7 @@ void	check_spaces(t_cube *data)
 		while (x < data->map.width)
 		{
 			if (data->map.map[y][x] == '0')
-				check_cell_neighbors(data, x, y, dx, dy);
+				check_cell_neighbors(data, x, y);
 			x++;
 		}
 		y++;

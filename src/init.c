@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:17 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/10 17:37:08 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/13 15:35:18 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-static void	set_cam_dir(t_cube *c)
-{
-	if (c->map.spawn_dir == 'N')
-	{
-		c->cam.dir_x = 0; c->cam.dir_y = -1;
-		c->cam.plane_x = 0.66; c->cam.plane_y = 0;
-	}
-	else if (c->map.spawn_dir == 'S')
-	{
-		c->cam.dir_x = 0; c->cam.dir_y = 1;
-		c->cam.plane_x = -0.66; c->cam.plane_y = 0;
-	}
-	else if (c->map.spawn_dir == 'E')
-	{
-		c->cam.dir_x = 1; c->cam.dir_y = 0;
-		c->cam.plane_x = 0; c->cam.plane_y = 0.66;
-	}
-	else if (c->map.spawn_dir == 'W')
-	{
-		c->cam.dir_x = -1; c->cam.dir_y = 0;
-		c->cam.plane_x = 0; c->cam.plane_y = -0.66;
-	}
-}
-
-void	init_cam(t_cube *c)
-{
-	c->cam.pos_x += 0.5;
-	c->cam.pos_y += 0.5;
-	set_cam_dir(c);
-	c->cam.move_speed = 0.05;
-	c->cam.rot_speed = 0.03;
-}
 
 static void	init_keys(t_keys *k)
 {

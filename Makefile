@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: celia <celia@student.42.fr>                +#+  +:+       +#+         #
+#    By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/05/10 16:43:28 by celia            ###   ########.fr        #
+#    Updated: 2026/05/13 15:37:23 by cbrice           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ endif
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC = ./src/main.c ./src/check_map_borders.c\
-	  ./src/check_map.c ./src/exit.c ./src/init_game.c ./src/init_map.c\
+	  ./src/check_map.c ./src/exit.c ./src/init_cam.c ./src/init_game.c ./src/init_map.c\
 	  ./src/parse_rgb.c ./src/parsing_identifiers.c\
 	  ./src/parsing_map.c ./src/read_map.c \
 	  ./src/init.c ./src/close.c ./src/color.c ./src/minimap.c ./src/input.c ./src/pixel.c ./src/render.c \
