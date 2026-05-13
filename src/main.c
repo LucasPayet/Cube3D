@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:41:13 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/10 17:22:51 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/13 17:26:03 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+static void	ft_check_extension(char *filename, t_cube *data)
+{
+	int	len;
+
+	len = ft_strlen(filename);
+	if (len < 5 || ft_strncmp(filename + len - 4, ".cub", 4) != 0)
+		error_exit("file must have .cub extension", data);
+}
 
 void	ft_map_data(t_cube *data, char *name)
 {
@@ -32,6 +41,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	ft_map_data(&game, av[1]);
+	ft_check_extension(av[1], &game);
 	ft_map_height(&game);
 	ft_parse_identifiers(&game);
 	ft_read_map(&game);

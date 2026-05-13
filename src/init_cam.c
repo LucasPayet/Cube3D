@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 17:39:29 by celia             #+#    #+#             */
-/*   Updated: 2026/05/13 15:35:48 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/13 17:31:37 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,7 @@ void	init_cam(t_cube *c)
 	set_cam_dir(c);
 	c->cam.move_speed = 0.05;
 	c->cam.rot_speed = 0.03;
+	printf("spawn=%c dir_x=%.2f dir_y=%.2f plane_x=%.2f plane_y=%.2f\n",
+		c->map.spawn_dir, c->cam.dir_x, c->cam.dir_y,
+		c->cam.plane_x, c->cam.plane_y);
 }

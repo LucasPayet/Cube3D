@@ -6,7 +6,7 @@
 #    By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/05/13 15:37:23 by cbrice           ###   ########.fr        #
+#    Updated: 2026/05/13 17:21:50 by cbrice           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)
 
 cub:
-	@printf '#!/bin/bash\nMAP=$$(find maps/ -name "$$1" 2>/dev/null | head -1)\nif [ -z "$$MAP" ]; then\n    echo "Error: '\''$$1'\'' not found in maps/"\n    exit 1\nfi\n./$(BIN_DIR)/$(NAME) "$$MAP"\n' > cub
+	@printf '#!/bin/bash\nif [[ "$$1" != *.cub ]]; then\n    printf "Error\\nFile must have .cub extension\\n"\n    exit 1\nfi\nMAP=$$(find maps/ -name "$$1" 2>/dev/null | head -1)\nif [ -z "$$MAP" ]; then\n    printf "Error\\n'\''%%s'\'' not found in maps/\\n" "$$1"\n    exit 1\nfi\n./$(BIN_DIR)/$(NAME) "$$MAP"\n' > cub
 	@chmod +x cub
 	@echo "> Script ./cub created"
 
