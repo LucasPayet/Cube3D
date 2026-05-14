@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/13 18:29:16 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/14 20:54:22 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@
 
 //check_map_border.c
 void	check_borders(t_cube *data);
-void	check_spaces(t_cube *data);
 
 //check_map.c
 void	ft_check_map(t_cube *data);

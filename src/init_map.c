@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:47 by celia             #+#    #+#             */
-/*   Updated: 2026/04/28 15:35:15 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/14 20:49:00 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_map_line(char *line)
 	while (line[i] && line[i] != '\n')
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != ' '
-			&& line[i] != 'N' && line[i] != 'S'
+			&& line[i] != '\t' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W')
 			return (0);
 		i++;

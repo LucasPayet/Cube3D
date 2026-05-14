@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:49:04 by celia             #+#    #+#             */
-/*   Updated: 2026/05/10 17:33:11 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/14 20:48:25 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_invalid_char(t_cube *data, char c)
 {
-	if (c != '0' && c != '1' && c != ' ')
+	if (c != '0' && c != '1' && c != ' ' && c != '\t')
 	{
 		ft_printf("Error\nInvalid char '%c' in map\n", c);
 		free_game(data);

@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 16:36:15 by celia             #+#    #+#             */
-/*   Updated: 2026/05/13 15:28:45 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/14 20:49:38 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	is_cell_done(t_cube *data, char **copy, int cx, int cy)
 		|| cx < 0 || cx >= data->map.width)
 		error_exit("map not closed", data);
 	if (copy[cy][cx] == ' ' || copy[cy][cx] == '\0')
+		error_exit("map not closed", data);
+	if (copy[cy][cx] == ' ' || copy[cy][cx] == '\0' || copy[cy][cx] == '\t')
 		error_exit("map not closed", data);
 	if (copy[cy][cx] == '1' || copy[cy][cx] == 'V')
 		return (1);
@@ -66,7 +68,6 @@ void	ft_check_map(t_cube *data)
 	int		i;
 
 	check_borders(data);
-	check_spaces(data);
 	copy = dup_map(data);
 	flood_fill(data, copy, (int)data->cam.pos_x, (int)data->cam.pos_y);
 	i = 0;
