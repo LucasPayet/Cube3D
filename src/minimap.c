@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 21:52:57 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/12 02:36:07 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/04 05:54:48 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,13 @@ void	renderd(t_cube *cube)
 {
 	int		i;
 	double	camera;
-	t_ray	r;
 
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
 		camera = 2 * i / (double)WIN_WIDTH - 1;
-		r.dir_x = cube->cam.dir_x + cube->cam.plane_x * camera;
-		r.dir_y = cube->cam.dir_y + cube->cam.plane_y * camera;
-		ray(cube, &r, i);
+		ray(cube, cube->cam.dir_x + cube->cam.plane_x * camera,
+			cube->cam.dir_y + cube->cam.plane_y * camera, i);
 		i++;
 	}
 }

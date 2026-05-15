@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/12 05:33:20 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/06 20:13:22 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,9 @@ int		update_pixel(t_img *img, int x, int y, int color);
 void	draw_square(t_img *img, int start_x, int start_y, int color);
 void	draw_line(t_img *img, t_pixel p0, t_pixel p1, int color);
 void	draw_vertical_line(t_img *img, t_vert v);
-void	draw_texture_line(t_cube *c, t_ray *r, t_vert v);
 
 // RENDER
 int		render(t_cube *c);
-void	ray(t_cube *c, t_ray *r, int x);
+void	ray(t_cube *c, double ray_dir_x, double ray_dir_y, int x);
 t_pixel	minimap_pos(t_cube *c, double x, double y);
 #endif

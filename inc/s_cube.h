@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/12 05:17:46 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/06 20:29:42 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ typedef struct s_pixel
 typedef struct s_vert
 {
 	int	x;
-	int	draw_start;
-	int draw_end;
-	int	line_height;
+	int	y_start;
+	int y_end;
 	int	color;
 }	t_vert;
 
@@ -52,8 +51,6 @@ typedef struct s_ray
 {
 	int		map_x;
 	int		map_y;
-	double	dir_x;
-	double	dir_y;
 	double	side_dist_x;
 	double	side_dist_y;
 	double	delta_dist_x;

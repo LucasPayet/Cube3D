@@ -6,7 +6,7 @@
 /*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 04:29:43 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/12 06:00:31 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/11 22:29:52 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ int	render(t_cube *c)
 	fill_minimap(c);
 	mlx_put_image_to_window(c->mlx.mlx, c->mlx.win, c->view_img.img, 0, 0);
 	mlx_put_image_to_window(c->mlx.mlx, c->mlx.win, c->map_img.img, 40, 40);
-	//mlx_put_image_to_window(c->mlx.mlx, c->mlx.win, c->textures.img, 40, 40);
 	return (0);
 }
