@@ -6,7 +6,7 @@
 /*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 16:34:40 by celia             #+#    #+#             */
-/*   Updated: 2026/04/28 15:36:15 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/10 17:33:26 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	open_and_skip(t_cube *data)
 	}
 	return (fd);
 }
+
 static char	*pad_line(char *line, int target_width, t_cube *data)
 {
 	char	*padded;
@@ -75,7 +76,6 @@ static void	fill_map(t_cube *data, int fd)
 	if (line)
 		free(line);
 }
-
 
 void	ft_read_map(t_cube *data)
 {

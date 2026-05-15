@@ -6,13 +6,13 @@
 /*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:55:29 by celia             #+#    #+#             */
-/*   Updated: 2026/04/28 15:07:02 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/10 17:22:05 by celia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void    parse_color(char *line, int j, t_cube *data, int fd)
+void	parse_color(char *line, int j, t_cube *data, int fd)
 {
 	if (ft_strncmp(line + j, "F ", 2) == 0)
 	{

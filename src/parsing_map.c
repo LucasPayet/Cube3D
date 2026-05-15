@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:49:04 by celia             #+#    #+#             */
-/*   Updated: 2026/05/06 20:44:29 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/14 20:48:25 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_invalid_char(t_cube *data, char c)
 {
-	if (c != '0' && c != '1' && c != ' ')
+	if (c != '0' && c != '1' && c != ' ' && c != '\t')
 	{
 		ft_printf("Error\nInvalid char '%c' in map\n", c);
 		free_game(data);
@@ -30,7 +30,6 @@ void	handle_spawn(t_cube *data, int x, int y, int *spawn_count)
 	data->map.spawn_dir = data->map.map[y][x];
 	data->map.map[y][x] = '0';
 }
-
 
 void	ft_validate_map(t_cube *data)
 {
@@ -60,7 +59,6 @@ void	ft_validate_map(t_cube *data)
 	if (spawn_count > 1)
 		error_exit("multiple spawn points", data);
 }
-
 
 void	init_dirs(int dx[4], int dy[4])
 {

@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 16:36:15 by celia             #+#    #+#             */
-/*   Updated: 2026/05/06 20:43:29 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/14 20:49:38 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	enqueue_neighbors(int queue[10000][2], int *tail,
-				int cx, int cy, int dx[4], int dy[4])
+static void	enqueue_neighbors(t_queue *q, int cx, int cy)
 {
 	int	i;
 
 	i = 0;
 	while (i < 4)
 	{
-		queue[*tail][0] = cx + dx[i];
-		queue[*tail][1] = cy + dy[i];
-		(*tail)++;
+		q->q[q->tail][0] = cx + q->dx[i];
+		q->q[q->tail][1] = cy + q->dy[i];
+		q->tail++;
 		i++;
 	}
 }
@@ -34,55 +33,50 @@ static int	is_cell_done(t_cube *data, char **copy, int cx, int cy)
 		error_exit("map not closed", data);
 	if (copy[cy][cx] == ' ' || copy[cy][cx] == '\0')
 		error_exit("map not closed", data);
+	if (copy[cy][cx] == ' ' || copy[cy][cx] == '\0' || copy[cy][cx] == '\t')
+		error_exit("map not closed", data);
 	if (copy[cy][cx] == '1' || copy[cy][cx] == 'V')
 		return (1);
 	return (0);
 }
 
-
-static void	flood_fill(t_cube *data, char **copy, int x, int y,
-				int dx[4], int dy[4])
+static void	flood_fill(t_cube *data, char **copy, int x, int y)
 {
-	int	queue[10000][2];
-	int	head;
-	int	tail;
-	int	cx;
-	int	cy;
+	t_queue	q;
+	int		cx;
+	int		cy;
 
-	head = 0;
-	tail = 0;
-	queue[tail][0] = x;
-	queue[tail++][1] = y;
-	while (head < tail)
+	init_dirs(q.dx, q.dy);
+	q.head = 0;
+	q.tail = 0;
+	q.q[q.tail][0] = x;
+	q.q[q.tail++][1] = y;
+	while (q.head < q.tail)
 	{
-		cx = queue[head][0];
-		cy = queue[head++][1];
+		cx = q.q[q.head][0];
+		cy = q.q[q.head++][1];
 		if (is_cell_done(data, copy, cx, cy))
 			continue ;
 		copy[cy][cx] = 'V';
-		enqueue_neighbors(queue, &tail, cx, cy, dx, dy);
+		enqueue_neighbors(&q, cx, cy);
 	}
 }
 
 void	ft_check_map(t_cube *data)
 {
 	char	**copy;
-	int		dx[4];
-	int		dy[4];
 	int		i;
 
-	init_dirs(dx, dy);
 	check_borders(data);
-	check_spaces(data);
 	copy = dup_map(data);
-	flood_fill(data, copy, data->cam.pos_x, data->cam.pos_y, dx, dy);
+	flood_fill(data, copy, (int)data->cam.pos_x, (int)data->cam.pos_y);
 	i = 0;
 	while (copy[i])
 		free(copy[i++]);
 	free(copy);
 }
 
-char    **dup_map(t_cube *data)
+char	**dup_map(t_cube *data)
 {
 	char	**copy;
 	int		i;
@@ -106,4 +100,3 @@ char    **dup_map(t_cube *data)
 	copy[i] = NULL;
 	return (copy);
 }
-

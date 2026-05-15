@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupayet <lupayet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:22:42 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/05 12:16:59 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/13 15:57:59 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	dda_loop(t_cube *c, t_ray *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (r->map_x < 0 || r->map_y < 0 || r->map_x >= c->map.width
-			|| r->map_y >= c->map.height)
+		if (r->map_x < 0 || r->map_y < 0
+			|| r->map_x >= c->map.width || r->map_y >= c->map.height)
 			break ;
 		if (c->map.map[r->map_y][r->map_x] == '1')
 			r->hit = 1;
@@ -57,30 +57,6 @@ void	draw_fov(t_cube *c, t_ray *r)
 		f++;
 }
 
-void	render3d(t_cube *c, t_ray *r, int x)
-{
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	t_vert	v;
-
-	line_height = (int)(WIN_HEIGHT / r->perp_wall_dist);
-	draw_start = -line_height / 2 + WIN_HEIGHT / 2;
-	draw_end = line_height / 2 + WIN_HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= WIN_HEIGHT)
-		draw_end = WIN_HEIGHT - 1;
-	v.x = x;
-	v.y_start = draw_start;
-	v.y_end = draw_end;
-	v.color = 0xFF0000;
-	if (r->side)
-		v.color = 0x0000FF;
-	draw_vertical_line(&c->view_img, v);
-	//draw_texture_line(c, v);
-}
-
 void	step_dir(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y)
 {
 	if (ray_dir_x < 0)
@@ -105,9 +81,24 @@ void	step_dir(t_cube *c, t_ray *r, double ray_dir_x, double ray_dir_y)
 	}
 }
 
+void	render3d(t_cube *c, t_ray *r, int x)
+{
+	t_draw_tex	d;
+
+	d.line_height = (int)(WIN_HEIGHT / r->perp_wall_dist);
+	d.draw_start = -d.line_height / 2 + WIN_HEIGHT / 2;
+	d.draw_end = d.line_height / 2 + WIN_HEIGHT / 2;
+	if (d.draw_start < 0)
+		d.draw_start = 0;
+	if (d.draw_end >= WIN_HEIGHT)
+		d.draw_end = WIN_HEIGHT - 1;
+	d.x = x;
+	draw_tex_line(c, r, &d);
+}
+
 void	ray(t_cube *c, double ray_dir_x, double ray_dir_y, int x)
 {
-	t_ray		r;
+	t_ray	r;
 
 	r.map_x = (int)floor(c->cam.pos_x);
 	r.map_y = (int)floor(c->cam.pos_y);
@@ -122,13 +113,14 @@ void	ray(t_cube *c, double ray_dir_x, double ray_dir_y, int x)
 	step_dir(c, &r, ray_dir_x, ray_dir_y);
 	dda_loop(c, &r);
 	if (r.side == 0)
-		r.perp_wall_dist = (r.map_x - c->cam.pos_x + (1 - r.step_x) / 2)
-			/ ray_dir_x;
+		r.perp_wall_dist = (r.map_x - c->cam.pos_x
+				+ (1 - r.step_x) / 2) / ray_dir_x;
 	else
-		r.perp_wall_dist = (r.map_y - c->cam.pos_y + (1 - r.step_y) / 2)
-			/ ray_dir_y;
+		r.perp_wall_dist = (r.map_y - c->cam.pos_y
+				+ (1 - r.step_y) / 2) / ray_dir_y;
 	r.hit_x = c->cam.pos_x + ray_dir_x * r.perp_wall_dist;
 	r.hit_y = c->cam.pos_y + ray_dir_y * r.perp_wall_dist;
+	calc_tex(c, &r, ray_dir_x, ray_dir_y);
 	draw_fov(c, &r);
 	render3d(c, &r, x);
 }

@@ -6,7 +6,7 @@
 #    By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 11:54:12 by lupayet           #+#    #+#              #
-#    Updated: 2026/05/06 21:03:43 by lupayet          ###   ########.fr        #
+#    Updated: 2026/05/13 18:29:30 by cbrice           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,11 @@ endif
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC = ./src/main.c ./src/check_map_borders.c\
-	  ./src/check_map.c ./src/exit.c ./src/init_game.c ./src/init_map.c\
+	  ./src/check_map.c ./src/exit.c ./src/init_cam.c ./src/init_map.c\
 	  ./src/parse_rgb.c ./src/parsing_identifiers.c\
 	  ./src/parsing_map.c ./src/read_map.c \
-	  ./src/init.c ./src/close.c ./src/color.c ./src/minimap.c ./src/input.c ./src/pixel.c ./src/render.c \
-	  ./src/raycast.c ./src/draw_line.c ./src/minimap_util.c ./src/draw_square.c
+	  ./src/init.c ./src/color.c ./src/minimap.c ./src/input.c ./src/pixel.c ./src/render.c \
+	  ./src/texture.c ./src/raycast.c ./src/draw_line.c ./src/minimap_util.c ./src/draw_square.c
 
 all: $(BIN_DIR)/$(NAME) cub
 
@@ -50,7 +50,7 @@ $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)
 
 cub:
-	@printf '#!/bin/bash\nMAP=$$(find maps/ -name "$$1" 2>/dev/null | head -1)\nif [ -z "$$MAP" ]; then\n    echo "Error: '\''$$1'\'' not found in maps/"\n    exit 1\nfi\n./$(BIN_DIR)/$(NAME) "$$MAP"\n' > cub
+	@printf '#!/bin/bash\nif [[ "$$1" != *.cub ]]; then\n    printf "Error\\nFile must have .cub extension\\n"\n    exit 1\nfi\nMAP=$$(find maps/ -name "$$1" 2>/dev/null | head -1)\nif [ -z "$$MAP" ]; then\n    printf "Error\\n'\''%%s'\'' not found in maps/\\n" "$$1"\n    exit 1\nfi\n./$(BIN_DIR)/$(NAME) "$$MAP"\n' > cub
 	@chmod +x cub
 	@echo "> Script ./cub created"
 

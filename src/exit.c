@@ -6,11 +6,35 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:33 by celia             #+#    #+#             */
-/*   Updated: 2026/05/06 19:09:22 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/13 18:28:46 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+int	close_cube(t_cube *c)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (c->tex[i].img)
+			mlx_destroy_image(c->mlx.mlx, c->tex[i].img);
+		i++;
+	}
+	if (c->map_img.img)
+		mlx_destroy_image(c->mlx.mlx, c->map_img.img);
+	if (c->view_img.img)
+		mlx_destroy_image(c->mlx.mlx, c->view_img.img);
+	if (c->mlx.win)
+		mlx_destroy_window(c->mlx.mlx, c->mlx.win);
+	mlx_destroy_display(c->mlx.mlx);
+	free(c->mlx.mlx);
+	free_game(c);
+	exit(0);
+	return (0);
+}
 
 void	free_game(t_cube *data)
 {
@@ -31,8 +55,6 @@ void	free_game(t_cube *data)
 			free(data->map.map[i++]);
 		free(data->map.map);
 	}
-	if (data->img)
-		free(data->img);
 }
 
 void	error_exit(char *msg, t_cube *data)
@@ -45,9 +67,6 @@ void	error_exit(char *msg, t_cube *data)
 
 int	ft_exit(void *param)
 {
-	t_cube	*data;
-
-	data = (t_cube *)param;
-	free_game(data);
-	exit(EXIT_SUCCESS);
+	close_cube((t_cube *)param);
+	return (0);
 }

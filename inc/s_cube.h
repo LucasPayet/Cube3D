@@ -6,16 +6,16 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/06 20:29:42 by lupayet          ###   ########.fr       */
+/*   Updated: 2026/05/13 16:00:33 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_CUBE_H
 # define S_CUBE_H
 
-typedef	int (*t_fn)(void);
+typedef int	(*t_fn)(void);
 
-typedef	struct s_mlx
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
@@ -25,19 +25,35 @@ typedef struct s_pixel
 {
 	int	x;
 	int	y;
-	int	z;
 	int	color;
 }	t_pixel;
+
+typedef struct s_queue
+{
+	int	q[10000][2];
+	int	head;
+	int	tail;
+	int	dx[4];
+	int	dy[4];
+}	t_queue;
 
 typedef struct s_vert
 {
 	int	x;
 	int	y_start;
-	int y_end;
+	int	y_end;
 	int	color;
 }	t_vert;
 
-typedef struct draw
+typedef struct s_draw_tex
+{
+	int	x;
+	int	draw_start;
+	int	draw_end;
+	int	line_height;
+}	t_draw_tex;
+
+typedef struct s_draw
 {
 	int	dx;
 	int	dy;
@@ -62,6 +78,9 @@ typedef struct s_ray
 	double	perp_wall_dist;
 	double	hit_x;
 	double	hit_y;
+	double	wall_x;
+	int		tex_x;
+	int		tex_num;
 }	t_ray;
 
 typedef struct s_minimap
@@ -87,7 +106,7 @@ typedef struct s_minimap
 typedef struct s_square
 {
 	int	v;
-	int x;
+	int	x;
 	int	y;
 	int	end_x;
 	int	end_y;
@@ -102,34 +121,13 @@ typedef struct s_img
 	int		endian;
 	int		x_len;
 	int		y_len;
-	int		on_exit;
-} t_img;
-
-/*typedef struct	s_cam
-{	
-	double	perpWallDist;
-	double	frameTime;
-	long	time;
-	long	oldTime;
-
-	int		side;
-
-	double	deltaDistX;
-	double	deltaDistY;
-
-	double sideDistX;
-	double sideDistY;
-	
-	int		playerX;
-	int		playerY;
-} t_cam;*/
+}	t_img;
 
 typedef struct s_map
 {
 	int		width;
 	int		height;
 	int		map_start;
-		
 	char	spawn_dir;
 	char	*fn;
 	char	**map;
@@ -157,7 +155,8 @@ typedef struct s_keys
 	int	right;
 }	t_keys;
 
-typedef	struct s_conf{
+typedef struct s_conf
+{
 	char	*tex_no;
 	char	*tex_so;
 	char	*tex_we;
@@ -165,7 +164,16 @@ typedef	struct s_conf{
 	int		floor[3];
 	int		ceil[3];
 	int		tex_parsed;
-}t_conf;
+}	t_conf;
+
+typedef struct s_dir_init
+{
+	char	spawn;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_dir_init;
 
 typedef struct s_cube
 {
@@ -175,8 +183,7 @@ typedef struct s_cube
 	t_keys	keys;
 	t_img	map_img;
 	t_img	view_img;
-	t_img	textures;
-	t_img	*img;
+	t_img	tex[4];
 	t_conf	conf;
 }	t_cube;
 
