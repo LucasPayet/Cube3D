@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:46:55 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/14 20:54:22 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/16 02:36:00 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	cube_init(t_cube *c, char *title);
 //input.c
 int		key_press(int keycode, t_cube *c);
 int		key_release(int keycode, t_keys *k);
+int		mouse_mov(int x, int y, t_cube *c);
 void	rotate(t_cube *c, double rot);
 
 //main.c

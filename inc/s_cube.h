@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:41:08 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/13 16:00:33 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/16 01:39:21 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ typedef struct s_keys
 	int	d;
 	int	left;
 	int	right;
+	int	mouse_x;
+	int	mouse_y;
 }	t_keys;
 
 typedef struct s_conf

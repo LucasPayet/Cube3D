@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 18:41:13 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/13 17:26:03 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/16 03:15:13 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int ac, char **av)
 	mlx_hook(game.mlx.win, 17, 0, (t_fn)(intptr_t)ft_exit, &game);
 	mlx_hook(game.mlx.win, 2, 1L << 0, (t_fn)(intptr_t)key_press, &game);
 	mlx_hook(game.mlx.win, 3, 1L << 1, (t_fn)(intptr_t)key_release, &game.keys);
+	mlx_hook(game.mlx.win, 6, 1L << 6, mouse_mov, &game);
 	mlx_loop_hook(game.mlx.mlx, (t_fn)(intptr_t)render, &game);
 	mlx_loop(game.mlx.mlx);
 	return (0);

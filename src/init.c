@@ -6,20 +6,23 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:17 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/13 15:35:18 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/16 03:05:21 by lupayet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	init_keys(t_keys *k)
+static void	init_keys(t_cube *c)
 {
-	k->w = 0;
-	k->s = 0;
-	k->a = 0;
-	k->d = 0;
-	k->left = 0;
-	k->right = 0;
+	c->keys.w = 0;
+	c->keys.s = 0;
+	c->keys.a = 0;
+	c->keys.d = 0;
+	c->keys.left = 0;
+	c->keys.right = 0;
+	mlx_mouse_get_pos(c->mlx.mlx, c->mlx.win, &c->keys.mouse_x,
+		&c->keys.mouse_y);
+	mlx_mouse_move(c->mlx.mlx, c->mlx.win, c->keys.mouse_x, c->keys.mouse_y);
 }
 
 static void	init_images(t_cube *c)
@@ -66,7 +69,7 @@ void	cube_init(t_cube *c, char *title)
 	c->mlx.mlx = mlx_init();
 	c->mlx.win = mlx_new_window(c->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, title);
 	init_images(c);
-	init_keys(&c->keys);
+	init_keys(c);
 	init_cam(c);
 	init_textures(c);
 }
