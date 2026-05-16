@@ -6,7 +6,7 @@
 /*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:48:59 by celia             #+#    #+#             */
-/*   Updated: 2026/04/30 19:12:08 by cbrice           ###   ########.fr       */
+/*   Updated: 2026/05/16 18:25:44 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	check_all_parsed(t_cube *data)
 {
 	if (data->conf.tex_parsed != 63)
 	{
-		ft_printf("Error\nMissing identifier(s) (mask: %d/63)\n",
+		ft_printf("Error\nMissing identifier(s)\n",
 			data->conf.tex_parsed);
 		free_game(data);
 		exit(EXIT_FAILURE);
