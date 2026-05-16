@@ -11,7 +11,7 @@ cub3D is a 3D maze exploration program inspired by the legendary game Wolfenstei
 The program reads a scene description file (.cub), parses the map and configuration, and renders a real-time 3D view using the MiniLibX graphics library. The player can navigate the maze using keyboard controls, with textured walls, colored floor and ceiling, and collision detection.
 
 
-## Key features:
+**Key features:**
 
 - Real-time 3D rendering via the DDA (Digital Differential Analysis) raycasting algorithm
 - 4 directional wall textures (North, South, East, West) loaded from .xpm files
@@ -61,19 +61,19 @@ The map file must have a .cub extension.
     ESC or Q	Quit
 
 Scene File Format (.cub)
-``` txt
-NO ./path/to/north_texture.xpm
-SO ./path/to/south_texture.xpm
-WE ./path/to/west_texture.xpm
-EA ./path/to/east_texture.xpm
-F 220,100,0
-C 50,50,50
 
-1111111111111
-1000000000001
-100N000000001
-1111111111111
-```
+	NO ./path/to/north_texture.xpm
+	SO ./path/to/south_texture.xpm
+	WE ./path/to/west_texture.xpm
+	EA ./path/to/east_texture.xpm
+	F 220,100,0
+	C 50,50,50
+
+	1111111111111
+	1000000000001
+	100N000000001
+	1111111111111
+
 - NO, SO, WE, EA — paths to .xpm wall textures
 - F — floor color (R,G,B values between 0 and 255)
 - C — ceiling color (R,G,B values between 0 and 255)
@@ -91,7 +91,7 @@ C 50,50,50
 	make val			Run with Valgrind memory checker
 
 
-**Resources**
+## Resources
 
 - Raycasting & 3D Graphics
 	- Lode's Raycasting Tutorial — The reference tutorial used as the mathematical foundation for this project: https://lodev.org/cgtutor/raycasting.html
