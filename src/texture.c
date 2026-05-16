@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celia <celia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cbrice <cbrice@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 12:12:34 by lupayet           #+#    #+#             */
-/*   Updated: 2026/05/10 16:41:53 by celia            ###   ########.fr       */
+/*   Updated: 2026/05/16 16:20:13 by cbrice           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	draw_tex_line(t_cube *c, t_ray *r, t_draw_tex *d)
 		color = *(int *)(c->tex[r->tex_num].addr
 				+ tex_y * c->tex[r->tex_num].line_length
 				+ r->tex_x * (c->tex[r->tex_num].bits_per_pixel / 8));
-		if (r->side == 1)
-			color = (color >> 1) & 0x7F7F7F;
 		update_pixel(&c->view_img, d->x, y, color);
 		y++;
 	}
