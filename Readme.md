@@ -15,7 +15,7 @@ Key features:
 	. Real-time 3D rendering via the DDA (Digital Differential Analysis) raycasting algorithm
 	. 4 directional wall textures (North, South, East, West) loaded from .xpm files
 	. Configurable floor and ceiling colors via RGB values in the scene file
-	. Smooth player movement (W/A/S/D) and camera rotation (arrow keys)
+	. Smooth player movement (W/A/S/D) and camera rotation (arrow keys or mouse)
 	. Wall collision detection with sliding along walls
 	. Minimap overlay for navigation assistance
 	. Robust .cub file parsing with detailed error handling
@@ -48,7 +48,7 @@ Controls
 	S			Move backward
 	A			Strafe left
 	D			Strafe right
-	<- ->		Rotate camera
+	<- ->		Rotate camera (and mouse)
 	ESC or Q	Quit
 
 Scene File Format (.cub)
